@@ -14,7 +14,6 @@ const overlay = () => css`
 const primaryBackgroundBox = (light = false) => css`
   min-height: 100vh;
   width: 100%;
-  display: flex;
   background-color: ${colors.primaryColor};
 
   background-image: ${light ? constants.bg1Light : constants.bg1Dark};
@@ -26,7 +25,6 @@ const primaryBackgroundBox = (light = false) => css`
 const secondaryBackgroundBox = (light = false) => css`
   min-height: 100vh;
   width: 100%;
-  display: flex;
   background-color: ${colors.primaryColor};
 
   background-image: ${light ? constants.bg2Light : constants.bg2Dark};
@@ -38,7 +36,7 @@ const secondaryBackgroundBox = (light = false) => css`
 const contentBox = (darkTextColor = false) => css`
   min-height: 100vh;
   width: calc(100% - 58px);
-  transform: translateX(56px);
+  justify-self: flex-end;
   padding: 30px;
   border: 5px solid red;
   ${headingStyle(darkTextColor)}
