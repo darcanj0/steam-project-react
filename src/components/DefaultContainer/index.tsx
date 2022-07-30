@@ -1,11 +1,11 @@
 import * as S from "./styles";
 
-interface DefaultBoxProps {
+interface DefaultContainerProps {
   light: boolean;
 }
 
-const DefaultBox = (props: DefaultBoxProps) => {
-  return <S.DefaultBox light={props.light}></S.DefaultBox>;
+const DefaultContainer = (props: DefaultContainerProps) => {
+  return <S.DefaultContainer light={props.light}></S.DefaultContainer>;
 };
 
-export default DefaultBox;
+export default DefaultContainer;

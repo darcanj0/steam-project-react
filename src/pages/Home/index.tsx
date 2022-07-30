@@ -1,7 +1,7 @@
-import DefaultBox from "../../components/DefaultContainer";
+import DefaultContainer from "../../components/DefaultContainer";
 
 const Home = (props: any) => {
-  return <DefaultBox light={false}></DefaultBox>;
+  return <DefaultContainer light={false}></DefaultContainer>;
 };
 
 export default Home;
