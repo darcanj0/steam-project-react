@@ -14,6 +14,7 @@ const Router = (props: any) => {
       <Route path={RoutePath.LOGIN} element={<Login />} />
       <Route path={RoutePath.PROFILES} element={<Profiles />} />
       <Route path={RoutePath.PROFILESELECTION} element={<ProfileSelection />} />
+      <Route path={RoutePath.SETTINGS} element={<ProfileSelection />} />
     </Routes>
   );
 };
