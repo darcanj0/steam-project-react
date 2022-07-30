@@ -1,5 +1,7 @@
+import DefaultBox from "../../components/DefaultBox";
+
 const Home = (props: any) => {
-  return <div className="Home">ola</div>;
+  return <DefaultBox light={false}></DefaultBox>;
 };
 
 export default Home;

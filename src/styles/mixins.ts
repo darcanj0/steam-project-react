@@ -11,17 +11,6 @@ const overlay = () => css`
   background: rgba(0, 0, 0, 0.6);
 `;
 
-const primaryBackgroundBox = (light = false) => css`
-  min-height: 100vh;
-  width: 100%;
-  background-color: ${colors.primaryColor};
-
-  background-image: ${light ? constants.bg1Light : constants.bg1Dark};
-
-  background-repeat: no-repeat;
-  background-size: cover;
-`;
-
 const secondaryBackgroundBox = (light = false) => css`
   min-height: 100vh;
   width: 100%;
@@ -45,7 +34,6 @@ const contentBox = (darkTextColor = false) => css`
 export const mixins = {
   headingStyle,
   overlay,
-  primaryBackgroundBox,
   secondaryBackgroundBox,
   contentBox,
 };
