@@ -1,4 +1,4 @@
-import DefaultBox from "../../components/DefaultBox";
+import DefaultBox from "../../components/DefaultContainer";
 
 const Home = (props: any) => {
   return <DefaultBox light={false}></DefaultBox>;
