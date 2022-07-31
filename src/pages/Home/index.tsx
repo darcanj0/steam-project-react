@@ -6,7 +6,7 @@ import NavBar from "../../components/NavBar";
 
 const Home = (props: any) => {
   return (
-    <DefaultContainer light={false}>
+    <DefaultContainer light={true}>
       <NavBar
         currentPage={{
           admin: false,

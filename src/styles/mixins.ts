@@ -9,6 +9,13 @@ const headingStyle = (inDarkMode = true) => css`
   font-weight: 400;
 `;
 
+const footerStyle = () => css`
+  font-family: ${constants.defaultFontfamily};
+  font-weight: 400;
+  color: ${colors.whiteTextColor};
+  letter-spacing: 0.2px;
+`;
+
 const overlay = () => css`
   background: rgba(0, 0, 0, 0.6);
 `;
@@ -31,6 +38,7 @@ const defaultGlass = () => css`
 
 export const mixins = {
   headingStyle,
+  footerStyle,
   overlay,
   secondaryBackgroundBox,
   defaultGlass,

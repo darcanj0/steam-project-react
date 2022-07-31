@@ -9,5 +9,6 @@ export const Footer = styled.footer`
   align-items: center;
   justify-content: space-between;
   ${({ theme }) => theme.mixins.defaultGlass()}
+  ${({ theme }) => theme.mixins.footerStyle()}
   background-color: ${({ theme }) => theme.colors.secondaryColor};
 `;

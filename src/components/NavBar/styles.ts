@@ -9,6 +9,7 @@ export const NavBar = styled.div`
   ${({ theme }) => css`
     background: ${theme.colors.secondaryColorOpacity};
     border: 1px solid ${theme.colors.glassBorderColor};
+    ${theme.mixins.defaultGlass()}
   `}
   border-radius: 0 5px 5px 0;
   height: 100vh;
