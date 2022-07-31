@@ -2,9 +2,10 @@ import { css } from "styled-components";
 import { colors } from "./colors";
 import { constants } from "./constants";
 
-const headingStyle = (dark = false) => css`
+const headingStyle = (inDarkMode = true) => css`
   font-family: ${constants.defaultFontfamily};
-  color: ${dark ? colors.darkTextColor : colors.whiteTextColor};
+  color: ${inDarkMode ? colors.whiteTextColor : colors.darkTextColor};
+  font-size: ${constants.headingTextSize};
 `;
 
 const overlay = () => css`
@@ -22,18 +23,8 @@ const secondaryBackgroundBox = (light = false) => css`
   background-size: cover;
 `;
 
-const contentBox = (darkTextColor = false) => css`
-  min-height: 100vh;
-  width: calc(100% - 58px);
-  justify-self: flex-end;
-  padding: 30px;
-  border: 5px solid red;
-  ${headingStyle(darkTextColor)}
-`;
-
 export const mixins = {
   headingStyle,
   overlay,
   secondaryBackgroundBox,
-  contentBox,
 };

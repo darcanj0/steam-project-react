@@ -1,4 +1,6 @@
+import ContentBox from "../../components/ContentBox";
 import DefaultContainer from "../../components/DefaultContainer";
+import HomeHeading from "../../components/HomeHeading";
 import NavBar from "../../components/NavBar";
 
 const Home = (props: any) => {
@@ -12,7 +14,12 @@ const Home = (props: any) => {
             profiles: false,
             settings: false,
           }}
-        ></NavBar>
+        />
+        <ContentBox>
+          <HomeHeading>New Release</HomeHeading>
+          <HomeHeading>All Games</HomeHeading>
+          <HomeHeading>Favorite Games</HomeHeading>
+        </ContentBox>
       </DefaultContainer>
     </>
   );
