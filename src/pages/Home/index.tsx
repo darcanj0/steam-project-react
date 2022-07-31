@@ -5,7 +5,14 @@ const Home = (props: any) => {
   return (
     <>
       <DefaultContainer light={false}>
-        <NavBar></NavBar>
+        <NavBar
+          currentPage={{
+            admin: false,
+            home: true,
+            profiles: false,
+            settings: false,
+          }}
+        ></NavBar>
       </DefaultContainer>
     </>
   );

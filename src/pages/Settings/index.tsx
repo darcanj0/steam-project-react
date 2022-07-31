@@ -4,7 +4,14 @@ import SecondaryContainer from "../../components/SecondaryContainer";
 const Settings = (props: any) => {
   return (
     <SecondaryContainer light={false}>
-      <NavBar></NavBar>
+      <NavBar
+        currentPage={{
+          home: false,
+          admin: false,
+          profiles: false,
+          settings: true,
+        }}
+      ></NavBar>
     </SecondaryContainer>
   );
 };
