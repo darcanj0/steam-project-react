@@ -6,6 +6,7 @@ const headingStyle = (inDarkMode = true) => css`
   font-family: ${constants.defaultFontfamily};
   color: ${inDarkMode ? colors.whiteTextColor : colors.darkTextColor};
   font-size: ${constants.headingTextSize};
+  font-weight: 400;
 `;
 
 const overlay = () => css`
@@ -23,8 +24,14 @@ const secondaryBackgroundBox = (light = false) => css`
   background-size: cover;
 `;
 
+const defaultGlass = () => css`
+  -webkit-backdrop-filter: blur(${constants.glassBlur});
+  backdrop-filter: blur(${constants.glassBlur});
+`;
+
 export const mixins = {
   headingStyle,
   overlay,
   secondaryBackgroundBox,
+  defaultGlass,
 };
