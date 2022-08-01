@@ -5,6 +5,10 @@ import { BiLockAlt } from "react-icons/bi";
 import { BiLogOut } from "react-icons/bi";
 import styled, { css } from "styled-components";
 
+interface NavBarIconProps {
+  active?: boolean;
+}
+
 export const NavBar = styled.div`
   ${({ theme }) => css`
     background: ${theme.colors.secondaryColorOpacity};
@@ -29,10 +33,9 @@ export const IconGroup = styled.div`
   gap: 15px;
 `;
 
-export const NavBarIcon = styled.a`
-  ${({ theme }) => css`
-    color: ${(props) =>
-      props.active ? theme.colors.tertiaryColor : theme.colors.whiteColor};
+export const NavBarIcon = styled.a<NavBarIconProps>`
+  ${({ theme, active }) => css`
+    color: ${active ? theme.colors.tertiaryColor : theme.colors.whiteColor};
     border-radius: ${theme.constants.defaultBorderRadius};
 
     :hover {
