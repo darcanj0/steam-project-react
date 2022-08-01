@@ -1,6 +1,6 @@
 import styled, { css } from "styled-components";
 
-interface DefaultContainerProps {
+export interface DefaultContainerProps {
   light?: boolean;
 }
 
