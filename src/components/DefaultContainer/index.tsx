@@ -1,7 +1,7 @@
 import * as S from "./styles";
 
 interface DefaultContainerProps {
-  light: boolean;
+  light?: boolean;
   children: any;
 }
 

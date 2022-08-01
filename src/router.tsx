@@ -10,7 +10,7 @@ import { RoutePath } from "./types/routes";
 const Router = (props: any) => {
   return (
     <Routes>
-      <Route path={RoutePath.HOME} element={<Home />} />
+      <Route path={RoutePath.HOME} element={<Home inLightMode={true} />} />
       <Route path={RoutePath.ADMIN} element={<Admin />} />
       <Route path={RoutePath.LOGIN} element={<Login />} />
       <Route path={RoutePath.PROFILES} element={<Profiles />} />
