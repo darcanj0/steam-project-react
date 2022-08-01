@@ -1,6 +1,11 @@
 import * as S from "./styles";
 
-const HomeHeading = (props: any) => {
+interface HomeHeadingProps {
+  inLightMode: boolean;
+  children: any;
+}
+
+const HomeHeading = (props: HomeHeadingProps) => {
   return <S.HomeHeading>{props.children}</S.HomeHeading>;
 };
 

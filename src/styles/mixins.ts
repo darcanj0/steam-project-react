@@ -2,9 +2,9 @@ import { css } from "styled-components";
 import { colors } from "./colors";
 import { constants } from "./constants";
 
-const headingStyle = (inDarkMode = true) => css`
+const headingStyle = (inLightMode = false) => css`
   font-family: ${constants.defaultFontfamily};
-  color: ${inDarkMode ? colors.whiteTextColor : colors.darkTextColor};
+  color: ${inLightMode ? colors.darkTextColor : colors.whiteTextColor};
   font-size: ${constants.headingTextSize};
   font-weight: 400;
 `;
