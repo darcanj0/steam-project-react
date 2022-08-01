@@ -6,4 +6,19 @@ export const ContentBox = styled.div`
   padding: 30px;
   border: 5px solid red;
   transform: translateX(56px);
+
+  div {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 1.5rem;
+
+    div {
+      background-color: #fffcff;
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+    }
+  }
 `;
