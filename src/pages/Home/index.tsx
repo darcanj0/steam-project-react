@@ -19,10 +19,12 @@ const Home = (props: HomeProps) => {
           settings: false,
         }}
       />
-      <ContentBox>
+      <ContentBox inLightMode={props.inLightMode}>
         <HomeHeading inLightMode={props.inLightMode}>New Release</HomeHeading>
         <HomeHeading inLightMode={props.inLightMode}>All Games</HomeHeading>
-        <HomeHeading inLightMode={props.inLightMode}>Favorite Games</HomeHeading>
+        <HomeHeading inLightMode={props.inLightMode}>
+          Favorite Games
+        </HomeHeading>
       </ContentBox>
 
       <Footer />

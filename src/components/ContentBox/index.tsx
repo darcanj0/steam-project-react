@@ -1,11 +1,16 @@
 import { LogoForContentBox } from "../Logo/styles";
 import * as S from "./styles";
 
-const ContentBox = (props: any) => {
+interface ContentBoxProps {
+  inLightMode?: boolean;
+  children: any;
+}
+
+const ContentBox = (props: ContentBoxProps) => {
   return (
-    <S.ContentBox inDarkMode={false}>
+    <S.ContentBox>
       <div>
-        <LogoForContentBox />
+        <LogoForContentBox inLightMode={props.inLightMode} />
         <div></div>
       </div>
       {props.children}
