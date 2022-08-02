@@ -9,7 +9,7 @@ interface ContentBoxProps {
 const ContentBox = (props: ContentBoxProps) => {
   return (
     <S.ContentBox>
-      <div>
+      <div id="logoAndPic">
         <LogoForContentBox inLightMode={props.inLightMode} />
         <div id="profilePicture"></div>
       </div>

@@ -6,7 +6,7 @@ export const ContentBox = styled.div`
   padding: 30px;
   transform: translateX(56px);
 
-  div {
+  #logoAndPic {
     display: flex;
     width: 100%;
     justify-content: space-between;
