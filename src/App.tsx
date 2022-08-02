@@ -2,7 +2,7 @@ import { useState } from "react";
 import Router from "./router";
 
 function App() {
-  const [lightMode, setLightMode] = useState<boolean>(false);
+  const [lightMode, setLightMode] = useState<boolean>(true);
 
   return <Router lightMode={lightMode}></Router>;
 }

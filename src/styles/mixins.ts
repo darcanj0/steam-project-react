@@ -9,6 +9,13 @@ const headingStyle = (inLightMode = false) => css`
   font-weight: 400;
 `;
 
+const titleStyle = () => css`
+  font-family: ${constants.defaultFontfamily};
+  color: ${colors.whiteTextColor};
+  font-size: ${constants.titleStyle};
+  font-weight: 700;
+`;
+
 const footerStyle = () => css`
   font-family: ${constants.defaultFontfamily};
   font-weight: 400;
@@ -17,7 +24,7 @@ const footerStyle = () => css`
 `;
 
 const overlay = () => css`
-  background: rgba(0, 0, 0, 0.6);
+  background: rgba(0, 0, 0, 0.1);
 `;
 
 const secondaryBackgroundBox = (light = false) => css`
@@ -42,4 +49,5 @@ export const mixins = {
   overlay,
   secondaryBackgroundBox,
   defaultGlass,
+  titleStyle,
 };

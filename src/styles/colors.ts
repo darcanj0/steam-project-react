@@ -5,7 +5,9 @@ export const colors = {
   testColor: "#ad2ad5",
   whiteColor: "#fffcff",
 
+  primaryColorOpacity: "rgba(14, 15, 38, 0.8)",
   secondaryColorOpacity: "rgba(48, 35, 153, 0.5)",
+  tertiaryColorOpacity: "rgba(95, 35, 165, 0.5)",
 
   glassBorderColor: "rgba(255, 255, 255, 0.18)",
 

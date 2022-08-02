@@ -24,8 +24,6 @@ const Home = (props: HomeProps) => {
     try {
       const response = await api.get("/game");
       setGames(response.data);
-      games.forEach((game) => console.log(game));
-      console.log(games);
     } catch (error) {
       console.log(error);
     }

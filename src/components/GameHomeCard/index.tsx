@@ -8,9 +8,13 @@ interface GameHomeCardProps {
 
 const GameHomeCard = (props: GameHomeCardProps) => {
   return (
-    <S.GameHomeCard imageUrl={props.game.cover_image_url}>
+    <S.GameHomeCard>
       <img src={props.game.cover_image_url} alt={props.game.title} />
-      <p>{props.game.title}</p>
+      <div>
+        <span>{props.game.year}</span>
+        <p>{props.game.title}</p>
+        <span>Metacritic Score: {props.game.score}</span>
+      </div>
     </S.GameHomeCard>
   );
 };
