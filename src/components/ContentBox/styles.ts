@@ -12,12 +12,17 @@ export const ContentBox = styled.div`
     justify-content: space-between;
     align-items: center;
     padding: 0 1.5rem;
+    margin: 0 0 40px 0;
 
-    div {
+    #profilePicture {
       background-color: #fffcff;
       width: 50px;
       height: 50px;
       border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0;
     }
   }
 `;

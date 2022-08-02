@@ -11,7 +11,7 @@ const ContentBox = (props: ContentBoxProps) => {
     <S.ContentBox>
       <div>
         <LogoForContentBox inLightMode={props.inLightMode} />
-        <div></div>
+        <div id="profilePicture"></div>
       </div>
       {props.children}
     </S.ContentBox>
