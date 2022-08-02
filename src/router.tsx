@@ -7,15 +7,37 @@ import ProfileSelection from "./pages/ProfileSelection";
 import Settings from "./pages/Settings";
 import { RoutePath } from "./types/routes";
 
-const Router = (props: any) => {
+interface RouterProps {
+  lightMode: boolean;
+}
+
+const Router = (props: RouterProps) => {
   return (
     <Routes>
-      <Route path={RoutePath.HOME} element={<Home inLightMode={true} />} />
-      <Route path={RoutePath.ADMIN} element={<Admin />} />
-      <Route path={RoutePath.LOGIN} element={<Login />} />
-      <Route path={RoutePath.PROFILES} element={<Profiles />} />
-      <Route path={RoutePath.PROFILESELECTION} element={<ProfileSelection />} />
-      <Route path={RoutePath.SETTINGS} element={<Settings />} />
+      <Route
+        path={RoutePath.HOME}
+        element={<Home inLightMode={props.lightMode} />}
+      />
+      <Route
+        path={RoutePath.ADMIN}
+        element={<Admin inLightMode={props.lightMode} />}
+      />
+      <Route
+        path={RoutePath.LOGIN}
+        element={<Login inLightMode={props.lightMode} />}
+      />
+      <Route
+        path={RoutePath.PROFILES}
+        element={<Profiles inLightMode={props.lightMode} />}
+      />
+      <Route
+        path={RoutePath.PROFILESELECTION}
+        element={<ProfileSelection inLightMode={props.lightMode} />}
+      />
+      <Route
+        path={RoutePath.SETTINGS}
+        element={<Settings inLightMode={props.lightMode} />}
+      />
     </Routes>
   );
 };
