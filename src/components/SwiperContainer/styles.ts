@@ -16,5 +16,7 @@ export const SwiperContainer = styled.section<SwiperContainerProps>`
     border-radius: ${theme.constants.defaultBorderRadius};
     display: flex;
     align-items: center;
+    justify-content: center;
+    padding: 0 2rem;
   `}
 `;
