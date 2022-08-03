@@ -13,6 +13,7 @@ import "swiper/css/bundle";
 import GameHomeCard from "../../components/GameHomeCard";
 import Game from "../../types/game";
 import Genre from "../../types/genres";
+import NewRelease from "../../components/NewRelease";
 
 interface HomeProps {
   inLightMode: boolean;
@@ -57,6 +58,7 @@ const Home = (props: HomeProps) => {
       />
       <ContentBox inLightMode={props.inLightMode}>
         <HomeHeading inLightMode={props.inLightMode}>New Release</HomeHeading>
+        <NewRelease />
 
         <HomeHeading inLightMode={props.inLightMode}>All Games</HomeHeading>
         <SwiperContainer>

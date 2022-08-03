@@ -1,6 +1,6 @@
 export const constants = {
   defaultFontfamily: "Play",
-  defaultBorderRadius: "10px",
+  defaultBorderRadius: "16px",
 
   headingTextSize: "2rem",
   titleStyle: "1rem",
