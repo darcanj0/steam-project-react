@@ -11,12 +11,11 @@ const divOverlayAnimation = keyframes`
 
 export const GameHomeCard = styled.div`
   background-color: ${({ theme }) => theme.colors.secondaryColorOpacity};
-  width: 350px;
+  width: 360px;
   display: flex;
   justify-content: center;
   align-items: center;
   border: 1px solid ${({ theme }) => theme.colors.glassBorderColor};
-  ${({ theme }) => theme.mixins.defaultGlass()}
 
   img {
     width: 100%;
@@ -32,7 +31,7 @@ export const GameHomeCard = styled.div`
     position: absolute;
     transition: all 0.5s ease;
     height: 100%;
-    width: 100%;
+    width: 360px;
 
     p,
     span {
@@ -53,6 +52,10 @@ export const GameHomeCard = styled.div`
 
       span {
         font-weight: 400;
+      }
+
+      p {
+        font-size: large;
       }
     }
   }

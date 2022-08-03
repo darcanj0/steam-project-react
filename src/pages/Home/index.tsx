@@ -50,16 +50,21 @@ const Home = (props: HomeProps) => {
         <SwiperContainer>
           <Swiper
             effect={"coverflow"}
-            spaceBetween={10}
+            spaceBetween={0}
             slidesPerView={4}
             centeredSlides={true}
             rewind={true}
-            modules={[Navigation, Autoplay, EffectCoverflow]}
+            modules={[Navigation, EffectCoverflow, Autoplay]}
+            autoplay={{
+              disableOnInteraction: false,
+              delay: 3000,
+              pauseOnMouseEnter: true,
+              waitForTransition: false,
+            }}
             navigation
-            autoplay={{ delay: 5000, disableOnInteraction: true }}
             grabCursor={true}
             coverflowEffect={{
-              rotate: 50,
+              rotate: 30,
               stretch: 0,
               depth: 70,
               modifier: 1,
@@ -70,7 +75,7 @@ const Home = (props: HomeProps) => {
               return (
                 <SwiperSlide key={game.id}>
                   <GameHomeCard game={game} key={game.id}>
-                    alo
+                    o
                   </GameHomeCard>
                 </SwiperSlide>
               );

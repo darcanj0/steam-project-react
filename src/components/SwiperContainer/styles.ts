@@ -10,7 +10,7 @@ export const SwiperContainer = styled.section<SwiperContainerProps>`
     ${theme.mixins.defaultGlass()}
     background: ${theme.colors.secondaryColorOpacity};
     width: 90%;
-    height: 350px;
+    height: 300px;
     border: 1px solid ${theme.colors.glassBorderColor};
     margin: 30px auto;
     border-radius: ${theme.constants.defaultBorderRadius};
