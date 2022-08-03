@@ -12,6 +12,7 @@ import "swiper/css";
 import "swiper/css/bundle";
 import GameHomeCard from "../../components/GameHomeCard";
 import Game from "../../types/game";
+import Genre from "../../types/genres";
 
 interface HomeProps {
   inLightMode: boolean;
@@ -19,6 +20,7 @@ interface HomeProps {
 
 const Home = (props: HomeProps) => {
   const [games, setGames] = useState<Game[]>([]);
+  const [genres, setGenres] = useState<Genre[]>([]);
 
   const getAllBoots = async () => {
     try {
@@ -29,8 +31,18 @@ const Home = (props: HomeProps) => {
     }
   };
 
+  const getAllGenres = async () => {
+    try {
+      const response = await api.get("/genre");
+      setGenres(response.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   useEffect(() => {
     getAllBoots();
+    getAllGenres();
   }, []);
 
   return (
@@ -57,7 +69,7 @@ const Home = (props: HomeProps) => {
             modules={[Navigation, EffectCoverflow, Autoplay]}
             autoplay={{
               disableOnInteraction: false,
-              delay: 3000,
+              delay: 8000,
               pauseOnMouseEnter: true,
               waitForTransition: false,
             }}
@@ -71,21 +83,35 @@ const Home = (props: HomeProps) => {
               slideShadows: false,
             }}
           >
-            {games.map((game) => {
-              return (
-                <SwiperSlide key={game.id}>
-                  <GameHomeCard game={game} key={game.id}>
-                    o
-                  </GameHomeCard>
-                </SwiperSlide>
-              );
-            })}
+            {games
+              .sort((a, b) => a.title.localeCompare(b.title))
+              .map((game) => {
+                return (
+                  <SwiperSlide key={game.id}>
+                    <GameHomeCard game={game} key={game.id}>
+                      o
+                    </GameHomeCard>
+                  </SwiperSlide>
+                );
+              })}
           </Swiper>
         </SwiperContainer>
 
         <HomeHeading inLightMode={props.inLightMode}>
           Favorite Games
         </HomeHeading>
+        <SwiperContainer></SwiperContainer>
+
+        {genres.map((genre) => {
+          return (
+            <>
+              <HomeHeading inLightMode={props.inLightMode}>
+                {genre.genre_title}
+              </HomeHeading>
+              <SwiperContainer></SwiperContainer>
+            </>
+          );
+        })}
       </ContentBox>
 
       <Footer />
