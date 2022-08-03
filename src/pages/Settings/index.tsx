@@ -1,3 +1,4 @@
+import ContentBox from "../../components/ContentBox";
 import NavBar from "../../components/NavBar";
 import SecondaryContainer from "../../components/SecondaryContainer";
 
@@ -12,6 +13,8 @@ const Settings = (props: any) => {
           settings: true,
         }}
       ></NavBar>
+
+      <ContentBox>o</ContentBox>
     </SecondaryContainer>
   );
 };
