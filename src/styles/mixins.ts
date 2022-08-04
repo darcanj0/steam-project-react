@@ -16,6 +16,13 @@ const titleStyle = () => css`
   font-weight: 700;
 `;
 
+const logoTitleStyle = () => css`
+  font-family: ${constants.defaultFontfamily};
+  color: ${colors.whiteTextColor};
+  font-size: ${constants.logoTitle};
+  font-weight: 400;
+`;
+
 const footerStyle = () => css`
   font-family: ${constants.defaultFontfamily};
   font-weight: 400;
@@ -43,6 +50,24 @@ const defaultGlass = () => css`
   backdrop-filter: blur(${constants.glassBlur});
 `;
 
+const defaultButton = (btnSize = "small") => css`
+  height: 45px;
+  width: 400px;
+  background-color: transparent;
+  border: 3px solid ${colors.primaryColorOpacity};
+  border-radius: ${constants.defaultBorderRadius};
+  cursor: pointer;
+  transition: all .3s ease;
+  color: ${colors.whiteTextColor};
+  font-family: ${constants.defaultFontfamily};
+  font-size: 1.5rem;
+  font-weight: 400;
+
+  :hover {
+    background-color: ${colors.primaryColor};
+  }
+`;
+
 export const mixins = {
   headingStyle,
   footerStyle,
@@ -50,4 +75,6 @@ export const mixins = {
   secondaryBackgroundBox,
   defaultGlass,
   titleStyle,
+  logoTitleStyle,
+  defaultButton,
 };

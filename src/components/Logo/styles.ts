@@ -10,3 +10,9 @@ export const LogoForContentBox = styled(BsJoystick)<LogoForContentBoxProps>`
   color: ${({ theme, inLightMode }) =>
     inLightMode ? theme.colors.secondaryColor : theme.colors.whiteColor};
 `;
+
+export const LogoForLogin = styled(BsJoystick)<LogoForContentBoxProps>`
+  transform: scale(2.5);
+  color: ${({ theme, inLightMode }) =>
+    inLightMode ? theme.colors.secondaryColor : theme.colors.whiteColor};
+`;

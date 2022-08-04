@@ -37,6 +37,7 @@ export const NavBarIcon = styled.a<NavBarIconProps>`
   ${({ theme, active }) => css`
     color: ${active ? theme.colors.tertiaryColor : theme.colors.whiteColor};
     border-radius: ${theme.constants.defaultBorderRadius};
+    transition: all ${theme.constants.defaultHoverAnimationDuration} ease;
 
     :hover {
       background-color: ${theme.colors.glassBorderColor};
@@ -47,7 +48,6 @@ export const NavBarIcon = styled.a<NavBarIconProps>`
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: all 0.3s ease;
   cursor: pointer;
 `;
 

@@ -2,8 +2,11 @@ export const constants = {
   defaultFontfamily: "Play",
   defaultBorderRadius: "16px",
 
+  defaultHoverAnimationDuration: "0.3s",
+
   headingTextSize: "2rem",
   titleStyle: "1rem",
+  logoTitle: "2.8rem",
 
   glassBlur: "3px",
 
