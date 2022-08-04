@@ -52,7 +52,7 @@ const defaultGlass = () => css`
 
 const defaultButton = (btnSize = "small") => css`
   height: 45px;
-  width: 400px;
+  width: 300px;
   background-color: transparent;
   border: 3px solid ${colors.primaryColorOpacity};
   border-radius: ${constants.defaultBorderRadius};
@@ -60,7 +60,7 @@ const defaultButton = (btnSize = "small") => css`
   transition: all .3s ease;
   color: ${colors.whiteTextColor};
   font-family: ${constants.defaultFontfamily};
-  font-size: 1.5rem;
+  font-size: 1.2rem;
   font-weight: 400;
 
   :hover {

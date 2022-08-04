@@ -17,7 +17,6 @@ export const LoginForm = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: space-around;
 
     section {
       width: 100%;
@@ -28,12 +27,41 @@ export const LoginForm = styled.div`
       gap: 50px;
     }
 
-    div {
+    #inputFields {
       display: flex;
       flex-direction: column;
       width: 70%;
       height: 70%;
       justify-content: space-between;
+      gap: 15px;
+    }
+
+    .InputField {
+      width: 100%;
+      gap: 20px;
+    }
+
+    label {
+      font-size: 1.5rem;
+    }
+
+    input {
+      height: 30px;
+      width: 100%;
+      border-radius: ${theme.constants.defaultBorderRadius};
+      border: 1px solid ${theme.colors.glassBorderColor};
+      color: ${theme.colors.whiteTextColor};
+      background-color: ${theme.colors.primaryColorOpacity};
+      padding: 1rem 1rem;
+      font-size: 1.2rem;
+      font-family: ${theme.constants.defaultFontfamily};
+      letter-spacing: 1px;
+      text-align: left;
+      ${theme.mixins.defaultGlass()}
+    }
+
+    #formBtns {
+      margin: 20px;
     }
   `}
 `;
