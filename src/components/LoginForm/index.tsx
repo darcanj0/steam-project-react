@@ -45,7 +45,6 @@ const LoginForm = ({
       const response = await api.post("/auth", loginInfo);
       if (response.status === 201) {
         localStorage.setItem("steamProjectToken", response.data.token);
-        localStorage.setItem("steamProjectUserId", response.data.user.id);
         toast.success(`Welcome, ${response.data.user.user_name} !`, {
           style: {
             fontFamily: "Play",
