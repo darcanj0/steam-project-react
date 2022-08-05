@@ -4,7 +4,10 @@ import toast from "react-hot-toast";
 import { Navigation } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react";
 import api from "../../api";
+import HomeHeading from "../../components/HomeHeading";
+import ProfileCard from "../../components/ProfileCard";
 import SecondaryContainer from "../../components/SecondaryContainer";
+import * as S from "./styles";
 
 interface decodedJwt {
   id: string;
@@ -17,6 +20,7 @@ interface decodedJwt {
 interface userProfiles {
   id: string;
   gamer_tag: string;
+  image_url: string;
 }
 
 const ProfileSelection = (props: any) => {
@@ -46,17 +50,27 @@ const ProfileSelection = (props: any) => {
 
   return (
     <SecondaryContainer light={false}>
-      <Swiper
-        spaceBetween={0}
-        slidesPerView={3}
-        navigation
-        modules={[Navigation]}
-      >
-        {userProfiles.map((profile) => {
-          console.log(profile);
-          return <SwiperSlide>{profile.gamer_tag}</SwiperSlide>;
-        })}
-      </Swiper>
+      <S.TitleProfileSelection>Who is Playing?</S.TitleProfileSelection>
+      <S.SwiperContainerProfileSelection>
+        <Swiper
+          spaceBetween={50}
+          slidesPerView={2}
+          centeredSlides={true}
+          navigation
+          modules={[Navigation]}
+          rewind={true}
+          grabCursor={true}
+        >
+          {userProfiles.map((profile) => {
+            console.log(profile);
+            return (
+              <SwiperSlide>
+                <ProfileCard profile={profile} />
+              </SwiperSlide>
+            );
+          })}
+        </Swiper>
+      </S.SwiperContainerProfileSelection>
     </SecondaryContainer>
   );
 };
