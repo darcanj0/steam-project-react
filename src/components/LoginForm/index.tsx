@@ -1,4 +1,5 @@
 import { useState } from "react";
+import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 import api from "../../api";
 import Button from "../Button";
@@ -45,10 +46,26 @@ const LoginForm = ({
       if (response.status === 201) {
         localStorage.setItem("steamProjectToken", response.data.token);
         localStorage.setItem("steamProjectUserId", response.data.user.id);
+        toast.success(`Welcome, ${response.data.user.user_name} !`, {
+          style: {
+            fontFamily: "Play",
+            fontSize: "1.5rem",
+            background: "#5f23a5",
+            color: "#fffcff",
+          },
+        });
         navigate("/profileSelection");
       }
     } catch (error) {
-      console.log("deu ruim");
+      toast.error("Something went wrong...", {
+        style: {
+          fontFamily: "Play",
+          fontSize: "1.5rem",
+          background: "#5f23a5",
+          color: "#fffcff",
+        },
+      });
+      console.log(error);
     }
   };
 
@@ -59,16 +76,34 @@ const LoginForm = ({
       password: inputsValues.password,
       confirm_password: inputsValues.confirm_password,
       cpf: inputsValues.cpf,
-      is_admin:
-        inputsValues.admPassword === "asterixobelix123" ? true : false,
+      is_admin: inputsValues.admPassword === "asterixobelix123" ? true : false,
     };
 
     try {
       const response = await api.post("/user", userCreationInfo);
       if (response.status === 201) {
-        navigate("/profileSelection");
+        toast.success(
+          `Hello, ${response.data.user_name}, your account was successfully created !`,
+          {
+            style: {
+              fontFamily: "Play",
+              fontSize: "1.5rem",
+              background: "#5f23a5",
+              color: "#fffcff",
+            },
+          }
+        );
+        handleCreationModeChange();
       }
     } catch (error) {
+      toast.error("Something went wrong...", {
+        style: {
+          fontFamily: "Play",
+          fontSize: "1.5rem",
+          background: "#5f23a5",
+          color: "#fffcff",
+        },
+      });
       console.log(error);
     }
   };
