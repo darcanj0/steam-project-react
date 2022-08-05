@@ -12,7 +12,7 @@ export const LogoForContentBox = styled(BsJoystick)<LogoForContentBoxProps>`
 `;
 
 export const LogoForLogin = styled(BsJoystick)<LogoForContentBoxProps>`
-  transform: scale(2.5);
+  transform: scale(1.5);
   color: ${({ theme, inLightMode }) =>
     inLightMode ? theme.colors.secondaryColor : theme.colors.whiteColor};
 `;

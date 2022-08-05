@@ -5,7 +5,7 @@ export const LoginForm = styled.div`
     background: ${theme.colors.tertiaryColorOpacity};
     ${theme.mixins.defaultGlass()}
     ${theme.mixins.logoTitleStyle()}
-    height: 600px;
+    height: 800px;
     width: 60%;
     position: fixed;
     top: 50%;
@@ -42,11 +42,11 @@ export const LoginForm = styled.div`
     }
 
     label {
-      font-size: 1.5rem;
+      font-size: 1.2rem;
     }
 
     input {
-      height: 30px;
+      height: 20px;
       width: 100%;
       border-radius: ${theme.constants.defaultBorderRadius};
       border: 1px solid ${theme.colors.glassBorderColor};

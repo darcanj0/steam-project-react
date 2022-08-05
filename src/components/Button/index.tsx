@@ -1,7 +1,12 @@
 import * as S from "./styles";
 
-const Button = (props: any) => {
-  return <S.DefaultButton>{props.children}</S.DefaultButton>;
+interface ButtonProps {
+  onClick: () => void;
+  children: any;
+}
+
+const Button = ({ onClick, children }: ButtonProps) => {
+  return <S.DefaultButton onClick={onClick}>{children}</S.DefaultButton>;
 };
 
 export default Button;
