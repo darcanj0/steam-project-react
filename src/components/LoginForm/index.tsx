@@ -52,6 +52,27 @@ const LoginForm = ({
     }
   };
 
+  const handleUserCreation = async () => {
+    const userCreationInfo = {
+      email: inputsValues.email,
+      user_name: inputsValues.user_name,
+      password: inputsValues.password,
+      confirm_password: inputsValues.confirm_password,
+      cpf: inputsValues.cpf,
+      is_admin:
+        inputsValues.admPassword === "asterixobelix123" ? true : false,
+    };
+
+    try {
+      const response = await api.post("/user", userCreationInfo);
+      if (response.status === 201) {
+        navigate("/profileSelection");
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <S.LoginForm>
       <section>
@@ -152,8 +173,7 @@ const LoginForm = ({
           </Button>
           <Button
             onClick={() => {
-              console.log(inputsValues);
-              handleLogin();
+              creationMode ? handleUserCreation() : handleLogin();
             }}
           >
             {creationMode ? "Sign Up" : "Sign In"}
