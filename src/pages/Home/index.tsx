@@ -14,20 +14,26 @@ import GameHomeCard from "../../components/GameHomeCard";
 import Game from "../../types/game";
 import Genre from "../../types/genres";
 import NewRelease from "../../components/NewRelease";
+import Profile from "../../types/profiles";
+import Favorite from "../../types/favorite";
+import toast from "react-hot-toast";
 
 interface HomeProps {
   inLightMode: boolean;
+  currentProfile: Profile | undefined;
 }
 
-const Home = (props: HomeProps) => {
+const Home = ({ inLightMode, currentProfile }: HomeProps) => {
   const [games, setGames] = useState<Game[]>([]);
   const [genres, setGenres] = useState<Genre[]>([]);
+  const [favorites, setFavorites] = useState<Favorite[]>([]);
 
   const getAllBoots = async () => {
     try {
       const response = await api.get("/game");
       setGames(response.data);
     } catch (error) {
+      toast.error("We couldn't load our games");
       console.log(error);
     }
   };
@@ -37,6 +43,32 @@ const Home = (props: HomeProps) => {
       const response = await api.get("/genre");
       setGenres(response.data);
     } catch (error) {
+      toast.error("We couldn't load our game genres");
+      console.log(error);
+    }
+  };
+
+  const getProfileFavorites = async () => {
+    try {
+      console.log(
+        `being sent with id ${
+          currentProfile?.id || "47324206-487f-4517-8c14-6624a0d59821"
+        }`
+      );
+      const response = await api.get(
+        `/favorite/${
+          currentProfile?.id || "47324206-487f-4517-8c14-6624a0d59821"
+        }`,
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem(
+              "steamProjectToken"
+            )}`,
+          },
+        }
+      );
+      setFavorites(response.data);
+    } catch (error) {
       console.log(error);
     }
   };
@@ -44,10 +76,11 @@ const Home = (props: HomeProps) => {
   useEffect(() => {
     getAllBoots();
     getAllGenres();
+    getProfileFavorites();
   }, []);
 
   return (
-    <DefaultContainer light={props.inLightMode}>
+    <DefaultContainer light={inLightMode}>
       <NavBar
         currentPage={{
           admin: false,
@@ -56,11 +89,11 @@ const Home = (props: HomeProps) => {
           settings: false,
         }}
       />
-      <ContentBox inLightMode={props.inLightMode}>
-        <HomeHeading inLightMode={props.inLightMode}>New Release</HomeHeading>
+      <ContentBox inLightMode={inLightMode}>
+        <HomeHeading inLightMode={inLightMode}>New Release</HomeHeading>
         <NewRelease />
 
-        <HomeHeading inLightMode={props.inLightMode}>All Games</HomeHeading>
+        <HomeHeading inLightMode={inLightMode}>All Games</HomeHeading>
         <SwiperContainer>
           <Swiper
             effect={"coverflow"}
@@ -97,10 +130,45 @@ const Home = (props: HomeProps) => {
           </Swiper>
         </SwiperContainer>
 
-        <HomeHeading inLightMode={props.inLightMode}>
-          Favorite Games
-        </HomeHeading>
-        <SwiperContainer></SwiperContainer>
+        <HomeHeading inLightMode={inLightMode}>Favorite Games</HomeHeading>
+        <SwiperContainer>
+          <Swiper
+            effect={"coverflow"}
+            spaceBetween={0}
+            slidesPerView={3}
+            centeredSlides={true}
+            rewind={true}
+            modules={[Navigation, EffectCoverflow, Autoplay]}
+            autoplay={{
+              disableOnInteraction: false,
+              delay: 8000,
+              pauseOnMouseEnter: true,
+              waitForTransition: false,
+            }}
+            navigation
+            grabCursor={true}
+            coverflowEffect={{
+              rotate: 30,
+              stretch: 0,
+              depth: 70,
+              modifier: 1,
+              slideShadows: false,
+            }}
+          >
+            {favorites.map((favorite) => {
+              const game: Game | undefined = games.find(
+                (game) => game.title === favorite.game_title
+              );
+              return (
+                game && (
+                  <SwiperSlide>
+                    <GameHomeCard game={game} />
+                  </SwiperSlide>
+                )
+              );
+            })}
+          </Swiper>
+        </SwiperContainer>
 
         {genres.map((genre) => {
           return (

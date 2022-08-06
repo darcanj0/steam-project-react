@@ -1,9 +1,12 @@
 import jwt_decode from "jwt-decode";
-import { useEffect, useState } from "react";
+import { Dispatch, SetStateAction, useEffect, useState } from "react";
 import toast from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
 import api from "../../api";
 import ProfileCard from "../../components/ProfileCard";
 import SecondaryContainer from "../../components/SecondaryContainer";
+import Profile from "../../types/profiles";
+import { RoutePath } from "../../types/routes";
 import * as S from "./styles";
 
 interface decodedJwt {
@@ -20,8 +23,15 @@ interface userProfiles {
   image_url: string;
 }
 
-const ProfileSelection = (props: any) => {
+interface ProfileSelectionProps {
+  setCurrentProfile: Dispatch<SetStateAction<Profile | undefined>>;
+  inLightMode: boolean;
+}
+
+const ProfileSelection = ({ setCurrentProfile }: ProfileSelectionProps) => {
   const [userProfiles, setUserProfiles] = useState<userProfiles[]>([]);
+
+  const navigate = useNavigate();
 
   const getUserProfiles = async () => {
     try {
@@ -57,8 +67,16 @@ const ProfileSelection = (props: any) => {
         </S.SwiperCreateProfileCard>
 
         {userProfiles.map((profile) => {
-          console.log(profile);
-          return <ProfileCard profile={profile} />;
+          return (
+            <ProfileCard
+              onClick={() => {
+                setCurrentProfile(profile);
+                navigate(RoutePath.HOME);
+              }}
+              profile={profile}
+              key={profile.id}
+            />
+          );
         })}
       </S.ContainerProfileSelection>
     </SecondaryContainer>
