@@ -12,7 +12,6 @@ export const ContainerProfileSelection = styled.div`
   align-items: center;
   justify-content: center;
   flex-wrap: wrap;
-  border: 1px solid green;
   overflow-y: auto;
 `;
 
