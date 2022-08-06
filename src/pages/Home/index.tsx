@@ -90,9 +90,7 @@ const Home = (props: HomeProps) => {
               .map((game) => {
                 return (
                   <SwiperSlide key={game.id}>
-                    <GameHomeCard game={game} key={game.id}>
-                      o
-                    </GameHomeCard>
+                    <GameHomeCard game={game} key={game.id} />
                   </SwiperSlide>
                 );
               })}
@@ -107,10 +105,46 @@ const Home = (props: HomeProps) => {
         {genres.map((genre) => {
           return (
             <>
-              <HomeHeading inLightMode={props.inLightMode}>
-                {genre.genre_title}
-              </HomeHeading>
-              <SwiperContainer></SwiperContainer>
+              <HomeHeading>{genre.genre_title}</HomeHeading>
+              <SwiperContainer>
+                <Swiper
+                  effect={"coverflow"}
+                  spaceBetween={0}
+                  slidesPerView={3}
+                  centeredSlides={true}
+                  rewind={true}
+                  modules={[Navigation, EffectCoverflow, Autoplay]}
+                  autoplay={{
+                    disableOnInteraction: false,
+                    delay: 8000,
+                    pauseOnMouseEnter: true,
+                    waitForTransition: false,
+                  }}
+                  navigation
+                  grabCursor={true}
+                  coverflowEffect={{
+                    rotate: 30,
+                    stretch: 0,
+                    depth: 70,
+                    modifier: 1,
+                    slideShadows: false,
+                  }}
+                >
+                  {games
+                    .filter((game) =>
+                      game.genres.some(
+                        (genreObj) => genreObj.genre_title === genre.genre_title
+                      )
+                    )
+                    .map((filteredGame) => {
+                      return (
+                        <SwiperSlide>
+                          <GameHomeCard game={filteredGame} />
+                        </SwiperSlide>
+                      );
+                    })}
+                </Swiper>
+              </SwiperContainer>
             </>
           );
         })}

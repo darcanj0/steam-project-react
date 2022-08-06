@@ -2,7 +2,6 @@ import Game from "../../types/game";
 import * as S from "./styles";
 
 interface GameHomeCardProps {
-  children: any;
   game: Game;
 }
 

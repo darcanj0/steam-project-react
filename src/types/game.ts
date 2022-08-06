@@ -7,6 +7,7 @@ interface Game {
   gameplay_utl: string;
   cover_image_url: string;
   description: string;
+  genres: { genre_title: string }[];
 
   updated_at?: Date;
   created_at?: Date;
