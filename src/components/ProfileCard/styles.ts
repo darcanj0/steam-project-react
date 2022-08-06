@@ -12,7 +12,7 @@ export const ProfileCard = styled.a`
 
     img {
       width: 80%;
-      height: 190px;
+      height: 200px;
       border-radius: 50%;
       border: 10px solid transparent;
       transition: all .3s ease;
