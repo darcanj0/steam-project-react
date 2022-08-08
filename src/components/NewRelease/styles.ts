@@ -32,8 +32,10 @@ export const NewReleaseContainer = styled.div`
       }
 
       p {
+        max-width: 100%;
         text-align: justify;
         font-size: 0.8rem;
+        overflow: hidden;
       }
 
       span {
