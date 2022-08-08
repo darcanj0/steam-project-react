@@ -1,8 +1,4 @@
-import { BiCog } from "react-icons/bi";
-import { BiHome } from "react-icons/bi";
-import { BiUser } from "react-icons/bi";
-import { BiLockAlt } from "react-icons/bi";
-import { BiLogOut } from "react-icons/bi";
+import { BiCog, BiHome, BiLockAlt, BiLogOut, BiUser } from "react-icons/bi";
 import styled, { css } from "styled-components";
 
 interface NavBarIconProps {
@@ -35,38 +31,36 @@ export const IconGroup = styled.div`
 
 export const NavBarIcon = styled.a<NavBarIconProps>`
   ${({ theme, active }) => css`
-    color: ${active ? theme.colors.tertiaryColor : theme.colors.whiteColor};
-    border-radius: ${theme.constants.defaultBorderRadius};
-    transition: all ${theme.constants.defaultHoverAnimationDuration} ease;
-
-    :hover {
-      background-color: ${theme.colors.glassBorderColor};
-    }
+    ${theme.mixins.iconButtonStyle(active)}
   `}
-  width: 40px;
-  height: 40px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
 `;
 
 export const SettingsIcon = styled(BiCog)`
-  transform: scale(1.5);
+  ${({ theme }) => css`
+    ${theme.mixins.iconStyle}
+  `}
 `;
 
 export const HomeIcon = styled(BiHome)`
-  transform: scale(1.5);
+  ${({ theme }) => css`
+    ${theme.mixins.iconStyle}
+  `}
 `;
 
 export const ProfileIcon = styled(BiUser)`
-  transform: scale(1.5);
+  ${({ theme }) => css`
+    ${theme.mixins.iconStyle}
+  `}
 `;
 
 export const AdminIcon = styled(BiLockAlt)`
-  transform: scale(1.5);
+  ${({ theme }) => css`
+    ${theme.mixins.iconStyle}
+  `}
 `;
 
 export const LogoutIcon = styled(BiLogOut)`
-  transform: scale(1.5);
+  ${({ theme }) => css`
+    ${theme.mixins.iconStyle}
+  `}
 `;

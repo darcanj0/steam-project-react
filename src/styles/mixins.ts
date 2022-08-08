@@ -57,7 +57,7 @@ const defaultButton = (btnSize = "small") => css`
   border: 3px solid ${colors.primaryColorOpacity};
   border-radius: ${constants.defaultBorderRadius};
   cursor: pointer;
-  transition: all .3s ease;
+  transition: all 0.3s ease;
   color: ${colors.whiteTextColor};
   font-family: ${constants.defaultFontfamily};
   font-size: 1.2rem;
@@ -66,6 +66,25 @@ const defaultButton = (btnSize = "small") => css`
   :hover {
     background-color: ${colors.primaryColor};
   }
+`;
+
+const iconButtonStyle = (active: boolean) => css`
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  border-radius: ${constants.defaultBorderRadius};
+  transition: all ${constants.defaultHoverAnimationDuration} ease;
+  color: ${active ? colors.tertiaryColor : colors.whiteColor};
+  :hover {
+    background-color: ${colors.glassBorderColor};
+  }
+`;
+
+const iconStyle = () => css`
+  transform: scale(1.5);
 `;
 
 export const mixins = {
@@ -77,4 +96,6 @@ export const mixins = {
   titleStyle,
   logoTitleStyle,
   defaultButton,
+  iconStyle,
+  iconButtonStyle,
 };
