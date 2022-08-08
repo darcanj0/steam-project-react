@@ -1,4 +1,5 @@
 import { useState } from "react";
+import AdmContentBox from "../../components/AdmContentBox";
 import ConfigContentBox from "../../components/ConfigContentBox";
 import ContentBox from "../../components/ContentBox";
 import Footer from "../../components/Footer";
@@ -30,8 +31,12 @@ const Admin = (props: any) => {
             currentManager={currentManager}
             setCurrentManager={setCurrentManager}
           />
-          {currentManager === "Manage games" && <h1>a</h1>}
-          {currentManager === "Manage profiles" && <h1>b</h1>}
+          {currentManager === "Manage games" && (
+            <AdmContentBox>aiaiai</AdmContentBox>
+          )}
+          {currentManager === "Manage genres" && (
+            <AdmContentBox>beibeibei</AdmContentBox>
+          )}
         </ConfigContentBox>
       </ContentBox>
       <Footer />
