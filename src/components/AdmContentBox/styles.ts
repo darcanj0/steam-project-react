@@ -8,5 +8,5 @@ export const AdmContentBox = styled.div`
     border-radius: 0 ${theme.constants.defaultBorderRadius}
       ${theme.constants.defaultBorderRadius} 0;
   `}
-  padding: 3rem 1rem;
+  padding: 3rem 1rem 1rem 1rem;
 `;

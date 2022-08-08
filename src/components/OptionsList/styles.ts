@@ -2,7 +2,7 @@ import styled, { css } from "styled-components";
 
 export const OptionsList = styled.div`
   ${({ theme }) => css`
-    width: 20%;
+    width: 18%;
     height: 100%;
     overflow: auto;
     border: 0.063rem solid ${theme.colors.glassBorderColor};
