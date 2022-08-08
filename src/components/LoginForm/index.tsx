@@ -2,6 +2,7 @@ import { useState } from "react";
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 import api from "../../api";
+import ToastStyle from "../../types/toastStyle";
 import Button from "../Button";
 import { LogoForLogin } from "../Logo/styles";
 import * as S from "./styles";
@@ -56,14 +57,7 @@ const LoginForm = ({
         navigate("/profileSelection");
       }
     } catch (error) {
-      toast.error("Something went wrong...", {
-        style: {
-          fontFamily: "Play",
-          fontSize: "1.5rem",
-          background: "#5f23a5",
-          color: "#fffcff",
-        },
-      });
+      toast.error("Something went wrong...", ToastStyle);
       console.log(error);
     }
   };
@@ -95,14 +89,7 @@ const LoginForm = ({
         handleCreationModeChange();
       }
     } catch (error) {
-      toast.error("Something went wrong...", {
-        style: {
-          fontFamily: "Play",
-          fontSize: "1.5rem",
-          background: "#5f23a5",
-          color: "#fffcff",
-        },
-      });
+      toast.error("Something went wrong...", ToastStyle);
       console.log(error);
     }
   };
