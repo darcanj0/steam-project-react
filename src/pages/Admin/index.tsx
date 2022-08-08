@@ -1,5 +1,9 @@
+import ConfigContentBox from "../../components/ConfigContentBox";
 import ContentBox from "../../components/ContentBox";
+import Footer from "../../components/Footer";
+import HomeHeading from "../../components/HomeHeading";
 import NavBar from "../../components/NavBar";
+import OptionsList from "../../components/OptionsList";
 import SecondaryContainer from "../../components/SecondaryContainer";
 
 const Admin = (props: any) => {
@@ -14,7 +18,13 @@ const Admin = (props: any) => {
         }}
       ></NavBar>
 
-      <ContentBox>o</ContentBox>
+      <ContentBox>
+        <HomeHeading>Manager Settings</HomeHeading>
+        <ConfigContentBox>
+          <OptionsList options={["Manage games", "Manage genres"]} />
+        </ConfigContentBox>
+      </ContentBox>
+      <Footer />
     </SecondaryContainer>
   );
 };

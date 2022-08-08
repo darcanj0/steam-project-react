@@ -5,6 +5,8 @@ export const ContentBox = styled.div`
   width: calc(100% - 58px);
   padding: 30px;
   transform: translateX(56px);
+  display: flex;
+  flex-direction: column;
 
   #logoAndPic {
     display: flex;
