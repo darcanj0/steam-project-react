@@ -44,7 +44,6 @@ const ProfileSelection = ({ setCurrentProfile }: ProfileSelectionProps) => {
         },
       });
       setUserProfiles(response.data.profiles);
-      console.log(userProfiles);
     } catch (error) {
       console.log(error);
       toast.error("Something went wrong... You will be redirected to login");

@@ -50,11 +50,6 @@ const Home = ({ inLightMode, currentProfile }: HomeProps) => {
 
   const getProfileFavorites = async () => {
     try {
-      console.log(
-        `being sent with id ${
-          currentProfile?.id || "47324206-487f-4517-8c14-6624a0d59821"
-        }`
-      );
       const response = await api.get(
         `/favorite/${
           currentProfile?.id || "47324206-487f-4517-8c14-6624a0d59821"

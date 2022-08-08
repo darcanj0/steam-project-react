@@ -15,7 +15,7 @@ export const OptionItem = styled.button<StyledOptionItemProps>`
     background: ${active ? theme.colors.testColor : "transparent"};
     transition: all 0.3s ease;
     :hover {
-      background-color: ${theme.colors.tertiaryColorOpacity};
+      background-color: ${!active && theme.colors.tertiaryColorOpacity};
     }
     h3 {
       ${theme.mixins.titleStyle()}

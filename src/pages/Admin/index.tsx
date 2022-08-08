@@ -1,3 +1,4 @@
+import { useState } from "react";
 import ConfigContentBox from "../../components/ConfigContentBox";
 import ContentBox from "../../components/ContentBox";
 import Footer from "../../components/Footer";
@@ -7,6 +8,9 @@ import OptionsList from "../../components/OptionsList";
 import SecondaryContainer from "../../components/SecondaryContainer";
 
 const Admin = (props: any) => {
+  const options = ["Manage games", "Manage genres"];
+  const [currentManager, setCurrentManager] = useState<string>(options[0]);
+
   return (
     <SecondaryContainer light={false}>
       <NavBar
@@ -21,7 +25,13 @@ const Admin = (props: any) => {
       <ContentBox>
         <HomeHeading>Manager Settings</HomeHeading>
         <ConfigContentBox>
-          <OptionsList options={["Manage games", "Manage genres"]} />
+          <OptionsList
+            options={options}
+            currentManager={currentManager}
+            setCurrentManager={setCurrentManager}
+          />
+          {currentManager === "Manage games" && <h1>a</h1>}
+          {currentManager === "Manage profiles" && <h1>b</h1>}
         </ConfigContentBox>
       </ContentBox>
       <Footer />

@@ -1,14 +1,17 @@
-import { useState } from "react";
 import OptionItem from "../OptionItem";
 import * as S from "./styles";
 
 interface OptionsListProps {
   options: string[];
+  currentManager: string;
+  setCurrentManager: (state: string) => void;
 }
 
-const OptionsList = ({ options }: OptionsListProps) => {
-  const [currentManager, setCurrentManager] = useState<string>(options[0]);
-
+const OptionsList = ({
+  options,
+  currentManager,
+  setCurrentManager,
+}: OptionsListProps) => {
   return (
     <S.OptionsList>
       {options.map((option) => {
@@ -17,7 +20,6 @@ const OptionsList = ({ options }: OptionsListProps) => {
             active={option === currentManager}
             option={option}
             onClick={() => {
-              console.log(currentManager);
               setCurrentManager(option);
             }}
           />
