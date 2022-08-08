@@ -12,18 +12,18 @@ interface NavBarIconProps {
 export const NavBar = styled.div`
   ${({ theme }) => css`
     background: ${theme.colors.secondaryColorOpacity};
-    border: 1px solid ${theme.colors.glassBorderColor};
+    border: 0.063rem solid ${theme.colors.glassBorderColor};
     ${theme.mixins.defaultGlass()}
   `}
-  border-radius: 0 5px 5px 0;
+  border-radius: 0 0.313rem 0.313rem 0;
   height: 100vh;
-  width: 56px;
+  width: 3.5rem;
   position: fixed;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
-  padding: 20px 0;
+  padding: 1.25rem 0;
 `;
 
 export const IconGroup = styled.div`

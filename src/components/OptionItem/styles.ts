@@ -7,7 +7,7 @@ interface StyledOptionItemProps {
 export const OptionItem = styled.button<StyledOptionItemProps>`
   ${({ theme, active }) => css`
     width: 100%;
-    height: 100px;
+    height: 6.25rem;
     display: flex;
     align-items: center;
     justify-content: center;

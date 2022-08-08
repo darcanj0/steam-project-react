@@ -2,9 +2,9 @@ import styled, { css } from "styled-components";
 
 export const ProfileCard = styled.a`
   ${({ theme }) => css`
-    width: 250px;
+    width: 15.625rem;
     background: transparent;
-    height: 250px;
+    height: 15.625rem;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -12,21 +12,21 @@ export const ProfileCard = styled.a`
 
     img {
       width: 80%;
-      height: 200px;
+      height: 12.5rem;
       border-radius: 50%;
-      border: 10px solid transparent;
+      border: 0.625rem solid transparent;
       transition: all .3s ease;
     }
 
     p {
       ${theme.mixins.titleStyle()}
       font-weight: 400;
-      margin: 10px;
+      margin: 0.625rem;
     }
 
     :hover {
       img {
-        border: 10px solid ${theme.colors.tertiaryColorOpacity};
+        border: 0.625rem solid ${theme.colors.tertiaryColorOpacity};
       }
       p {
         color: ${theme.mixins.primaryColor};

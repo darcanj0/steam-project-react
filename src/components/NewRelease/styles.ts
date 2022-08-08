@@ -2,12 +2,12 @@ import styled, { css } from "styled-components";
 
 export const NewReleaseContainer = styled.div`
   width: 55%;
-  height: 200px;
-  margin: 30px auto;
+  height: 12.5rem;
+  margin: 1.875rem auto;
   display: flex;
   ${({ theme }) => css`
     background: ${theme.colors.tertiaryColorOpacity};
-    border: 1px solid ${theme.colors.glassBorderColor};
+    border: 0.063rem solid ${theme.colors.glassBorderColor};
     ${theme.mixins.defaultGlass()}
 
     img {

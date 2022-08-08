@@ -2,7 +2,7 @@ import styled, { css } from "styled-components";
 
 export const ContainerProfileSelection = styled.div`
   max-width: 80%;
-  max-height: 700px;
+  max-height: 43.75rem;
   background-color: transparent;
   position: absolute;
   top: 50%;
@@ -17,20 +17,20 @@ export const ContainerProfileSelection = styled.div`
 
 export const SwiperCreateProfileCard = styled.a`
   ${({ theme }) => css`
-    width: 250px;
+    width: 15.625rem;
     background: transparent;
-    height: 250px;
+    height: 15.625rem;
     display: flex;
     flex-direction: column;
     align-items: center;
-   
+
     cursor: pointer;
 
     div {
       width: 80%;
-      height: 200px;
+      height: 12.5rem;
       border-radius: 50%;
-      border: 3px dashed ${theme.colors.tertiaryColor};
+      border: 0.188rem dashed ${theme.colors.tertiaryColor};
       transition: all 0.3s ease;
       display: flex;
       justify-content: center;
@@ -45,12 +45,12 @@ export const SwiperCreateProfileCard = styled.a`
     p {
       ${theme.mixins.titleStyle()}
       font-weight: 400;
-      margin: 10px;
+      margin: 0.625rem;
     }
 
     :hover {
       div {
-        border: 3px dashed ${theme.colors.testColor};
+        border: 0.188rem dashed ${theme.colors.testColor};
       }
     }
   `}
