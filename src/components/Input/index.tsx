@@ -2,7 +2,7 @@ import { InputHTMLAttributes } from "react";
 import * as S from "./styles";
 
 interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
-  inputSize?: "small" | "large";
+  inputSize?: "small" | "large" | "x-large";
 }
 
 const Input = ({ inputSize, ...props }: InputProps) => {
