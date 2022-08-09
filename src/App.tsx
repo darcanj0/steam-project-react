@@ -15,7 +15,6 @@ function App() {
         currentProfile={currentProfile}
         setCurrentProfile={setCurrentProfile}
       ></Router>
-      ;
     </>
   );
 }
