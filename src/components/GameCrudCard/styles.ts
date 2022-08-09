@@ -12,6 +12,7 @@ export const GameCrudCard = styled.div`
     ${theme.mixins.defaultGlass()}
     margin: 1.5rem 0;
     padding-right: 1rem;
+    background: ${theme.colors.tertiaryColorOpacity};
 
     img {
       height: 100%;

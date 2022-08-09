@@ -4,6 +4,7 @@ import ConfigContentBox from "../../components/ConfigContentBox";
 import ContentBox from "../../components/ContentBox";
 import Footer from "../../components/Footer";
 import GameCrudBox from "../../components/GameCrudBox";
+import GenreCrudBox from "../../components/GenreCrudBox";
 import HomeHeading from "../../components/HomeHeading";
 import NavBar from "../../components/NavBar";
 import OptionsList from "../../components/OptionsList";
@@ -38,7 +39,9 @@ const Admin = (props: any) => {
             </AdmContentBox>
           )}
           {currentManager === "Manage genres" && (
-            <AdmContentBox>beibeibei</AdmContentBox>
+            <AdmContentBox>
+              <GenreCrudBox />
+            </AdmContentBox>
           )}
         </ConfigContentBox>
       </ContentBox>
