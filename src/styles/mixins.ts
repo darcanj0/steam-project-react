@@ -31,7 +31,14 @@ const footerStyle = () => css`
 `;
 
 const overlay = () => css`
-  background: rgba(0, 0, 0, 0.1);
+  background: rgba(0, 0, 0, 0.6);
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  transform: translate(50%, 50%);
+  height: 100vh;
+  width: 100vw;
+  z-index: 9999;
 `;
 
 const secondaryBackgroundBox = (light = false) => css`
