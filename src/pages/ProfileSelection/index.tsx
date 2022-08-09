@@ -7,6 +7,7 @@ import ProfileCard from "../../components/ProfileCard";
 import SecondaryContainer from "../../components/SecondaryContainer";
 import Profile from "../../types/profiles";
 import { RoutePath } from "../../types/routes";
+import ToastStyle from "../../types/toastStyle";
 import * as S from "./styles";
 
 interface decodedJwt {
@@ -46,7 +47,10 @@ const ProfileSelection = ({ setCurrentProfile }: ProfileSelectionProps) => {
       setUserProfiles(response.data.profiles);
     } catch (error) {
       console.log(error);
-      toast.error("Something went wrong... You will be redirected to login");
+      toast.error(
+        "Something went wrong... You will be redirected to login",
+        ToastStyle
+      );
     }
   };
 

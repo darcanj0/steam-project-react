@@ -46,14 +46,7 @@ const LoginForm = ({
       const response = await api.post("/auth", loginInfo);
       if (response.status === 201) {
         localStorage.setItem("steamProjectToken", response.data.token);
-        toast.success(`Welcome, ${response.data.user.user_name} !`, {
-          style: {
-            fontFamily: "Play",
-            fontSize: "1.5rem",
-            background: "#5f23a5",
-            color: "#fffcff",
-          },
-        });
+        toast.success(`Welcome, ${response.data.user.user_name} !`, ToastStyle);
         navigate("/profileSelection");
       }
     } catch (error) {
@@ -77,14 +70,7 @@ const LoginForm = ({
       if (response.status === 201) {
         toast.success(
           `Hello, ${response.data.user_name}, your account was successfully created !`,
-          {
-            style: {
-              fontFamily: "Play",
-              fontSize: "1.5rem",
-              background: "#5f23a5",
-              color: "#fffcff",
-            },
-          }
+          ToastStyle
         );
         handleCreationModeChange();
       }

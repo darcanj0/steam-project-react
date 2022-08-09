@@ -17,6 +17,7 @@ import NewRelease from "../../components/NewRelease";
 import Profile from "../../types/profiles";
 import Favorite from "../../types/favorite";
 import toast from "react-hot-toast";
+import ToastStyle from "../../types/toastStyle";
 
 interface HomeProps {
   inLightMode: boolean;
@@ -33,7 +34,7 @@ const Home = ({ inLightMode, currentProfile }: HomeProps) => {
       const response = await api.get("/game");
       setGames(response.data);
     } catch (error) {
-      toast.error("We couldn't load our games");
+      toast.error("We couldn't load our games", ToastStyle);
       console.log(error);
     }
   };
@@ -43,7 +44,7 @@ const Home = ({ inLightMode, currentProfile }: HomeProps) => {
       const response = await api.get("/genre");
       setGenres(response.data);
     } catch (error) {
-      toast.error("We couldn't load our game genres");
+      toast.error("We couldn't load our game genres", ToastStyle);
       console.log(error);
     }
   };
@@ -64,6 +65,7 @@ const Home = ({ inLightMode, currentProfile }: HomeProps) => {
       );
       setFavorites(response.data);
     } catch (error) {
+      toast.error("We couldn't load your favorite games", ToastStyle);
       console.log(error);
     }
   };
