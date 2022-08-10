@@ -9,11 +9,30 @@ import OptionsList from "../../components/OptionsList";
 import SecondaryContainer from "../../components/SecondaryContainer";
 import * as S from "./styles";
 import { FiAlertTriangle } from "react-icons/fi";
+import Button from "../../components/Button";
+
+interface userEditInputs {
+  email: string;
+  password: string;
+  confirm_password: string;
+  user_name: string;
+  cpf: string;
+  adm_password: string;
+}
 
 const Settings = (props: any) => {
   const options = ["User information"];
   const [currentManager, setCurrentManager] = useState<string>(options[0]);
   const [showAlert, setShowAlert] = useState<boolean>(false);
+
+  const [inputsValues, setInputsValues] = useState<userEditInputs>({
+    email: "",
+    password: "",
+    confirm_password: "",
+    user_name: "",
+    cpf: "",
+    adm_password: "",
+  });
 
   return (
     <SecondaryContainer light={false}>
@@ -38,7 +57,17 @@ const Settings = (props: any) => {
             <S.UserForm>
               <div>
                 <label htmlFor="">E-mail</label>
-                <Input inputSize="x-large" placeholder="Change user email" />
+                <Input
+                  inputSize="x-large"
+                  placeholder="Change user email"
+                  value={inputsValues.email}
+                  onChange={(e) =>
+                    setInputsValues({ ...inputsValues, email: e.target.value })
+                  }
+                />
+                <a>
+                  <S.SendIcon />
+                </a>
               </div>
               {showAlert && (
                 <span>
@@ -48,7 +77,20 @@ const Settings = (props: any) => {
 
               <div>
                 <label htmlFor="">User Name</label>
-                <Input inputSize="x-large" placeholder="Change user name" />
+                <Input
+                  inputSize="x-large"
+                  placeholder="Change user name"
+                  value={inputsValues.user_name}
+                  onChange={(e) =>
+                    setInputsValues({
+                      ...inputsValues,
+                      user_name: e.target.value,
+                    })
+                  }
+                />
+                <a>
+                  <S.SendIcon />
+                </a>
               </div>
               {showAlert && (
                 <span>
@@ -59,7 +101,17 @@ const Settings = (props: any) => {
 
               <div>
                 <label htmlFor="">CPF</label>
-                <Input inputSize="x-large" placeholder="Change CPF" />
+                <Input
+                  inputSize="x-large"
+                  placeholder="Change CPF"
+                  value={inputsValues.cpf}
+                  onChange={(e) =>
+                    setInputsValues({ ...inputsValues, cpf: e.target.value })
+                  }
+                />
+                <a>
+                  <S.SendIcon />
+                </a>
               </div>
               {showAlert && (
                 <span>
@@ -70,7 +122,33 @@ const Settings = (props: any) => {
 
               <div>
                 <label htmlFor="">Password</label>
-                <Input inputSize="x-large" placeholder="Change password" />
+                <Input
+                  inputSize="small"
+                  placeholder="Change password"
+                  value={inputsValues.password}
+                  onChange={(e) =>
+                    setInputsValues({
+                      ...inputsValues,
+                      password: e.target.value,
+                    })
+                  }
+                />
+
+                <label htmlFor="">Confirm Password</label>
+                <Input
+                  inputSize="small"
+                  placeholder="Confirm password"
+                  value={inputsValues.confirm_password}
+                  onChange={(e) =>
+                    setInputsValues({
+                      ...inputsValues,
+                      confirm_password: e.target.value,
+                    })
+                  }
+                />
+                <a>
+                  <S.SendIcon />
+                </a>
               </div>
               {showAlert && (
                 <span>
@@ -81,18 +159,21 @@ const Settings = (props: any) => {
               )}
 
               <div>
-                <label htmlFor="">Confirm Password</label>
-                <Input inputSize="x-large" placeholder="Confirm password" />
-              </div>
-              {showAlert && (
-                <span>
-                  <FiAlertTriangle /> Must be identical to the password field
-                </span>
-              )}
-
-              <div>
                 <label htmlFor="">Manager Password</label>
-                <Input inputSize="x-large" placeholder="Manager password" />
+                <Input
+                  inputSize="x-large"
+                  placeholder="Manager password"
+                  value={inputsValues.adm_password}
+                  onChange={(e) =>
+                    setInputsValues({
+                      ...inputsValues,
+                      adm_password: e.target.value,
+                    })
+                  }
+                />
+                <a>
+                  <S.SendIcon />
+                </a>
               </div>
               {showAlert && (
                 <span>

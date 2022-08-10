@@ -1,3 +1,4 @@
+import { AiOutlineSend } from "react-icons/ai";
 import styled, { css } from "styled-components";
 
 export const UserForm = styled.div`
@@ -26,11 +27,21 @@ export const UserForm = styled.div`
       justify-content: space-between;
       margin-top: 2.5rem;
       margin-bottom: 0.5rem;
+
+      a {
+        ${theme.mixins.iconButtonStyle(false)}
+      }
     }
 
     label {
       ${theme.mixins.headingStyle()}
-      font-size: 1.875rem;
+      font-size: 1.5rem;
     }
+  `}
+`;
+
+export const SendIcon = styled(AiOutlineSend)`
+  ${({ theme }) => css`
+    ${theme.mixins.iconStyle()}
   `}
 `;
