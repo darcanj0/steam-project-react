@@ -1,4 +1,10 @@
+import { AxiosError } from "axios";
+import jwt_decode from "jwt-decode";
 import { useState } from "react";
+import toast from "react-hot-toast";
+import { FiAlertTriangle } from "react-icons/fi";
+import { useNavigate } from "react-router-dom";
+import api from "../../api";
 import ConfigContentBox from "../../components/ConfigContentBox";
 import ContentBox from "../../components/ContentBox";
 import Footer from "../../components/Footer";
@@ -7,9 +13,9 @@ import Input from "../../components/Input";
 import NavBar from "../../components/NavBar";
 import OptionsList from "../../components/OptionsList";
 import SecondaryContainer from "../../components/SecondaryContainer";
+import { RoutePath } from "../../types/routes";
+import ToastStyle from "../../types/toastStyle";
 import * as S from "./styles";
-import { FiAlertTriangle } from "react-icons/fi";
-import Button from "../../components/Button";
 
 interface userEditInputs {
   email: string;
@@ -20,10 +26,20 @@ interface userEditInputs {
   adm_password: string;
 }
 
+interface decodedJwt {
+  id: string;
+  is_admin: boolean;
+  email: string;
+  iat: number;
+  exp: number;
+}
+
 const Settings = (props: any) => {
   const options = ["User information"];
   const [currentManager, setCurrentManager] = useState<string>(options[0]);
   const [showAlert, setShowAlert] = useState<boolean>(false);
+
+  const navigate = useNavigate();
 
   const [inputsValues, setInputsValues] = useState<userEditInputs>({
     email: "",
@@ -33,6 +49,55 @@ const Settings = (props: any) => {
     cpf: "",
     adm_password: "",
   });
+
+  const decoded: decodedJwt = jwt_decode(
+    localStorage.getItem("steamProjectToken") || ""
+  );
+
+  const headers = {
+    headers: {
+      Authorization: `Bearer ${localStorage.getItem("steamProjectToken")}`,
+    },
+  };
+
+  const handleEmailEdit = async () => {
+    try {
+      const dto = { email: inputsValues.email };
+      api.patch(`/user/${decoded.id}`, dto, headers).then((res) => {
+        toast.success("Email successfully changed", ToastStyle);
+        toast("You will be redirected to login", ToastStyle);
+      });
+      navigate(RoutePath.LOGIN);
+    } catch (error: any) {
+      toast.error("Something went wrong", ToastStyle);
+      console.log(error);
+    }
+  };
+
+  const handleUserNameEdit = async () => {
+    try {
+      const dto = { user_name: inputsValues.user_name };
+      api.patch(`/user/${decoded.id}`, dto, headers).then((res) => {
+        toast.success("User name successfully changed", ToastStyle);
+        toast(`Hello, ${inputsValues.user_name}`, ToastStyle);
+      });
+    } catch (error) {
+      toast.error("Something went wrong", ToastStyle);
+      console.log(error);
+    }
+  };
+
+  const handleCpfEdit = async () => {
+    try {
+      const dto = { cpf: inputsValues.cpf };
+      api.patch(`/user/${decoded.id}`, dto, headers).then((res) => {
+        toast.success("CPF successfully changed", ToastStyle);
+      });
+    } catch (error) {
+      toast.error("Something went wrong", ToastStyle);
+      console.log(error);
+    }
+  };
 
   return (
     <SecondaryContainer light={false}>
@@ -65,7 +130,7 @@ const Settings = (props: any) => {
                     setInputsValues({ ...inputsValues, email: e.target.value })
                   }
                 />
-                <a>
+                <a onClick={handleEmailEdit}>
                   <S.SendIcon />
                 </a>
               </div>
@@ -88,7 +153,7 @@ const Settings = (props: any) => {
                     })
                   }
                 />
-                <a>
+                <a onClick={handleUserNameEdit}>
                   <S.SendIcon />
                 </a>
               </div>
@@ -109,7 +174,7 @@ const Settings = (props: any) => {
                     setInputsValues({ ...inputsValues, cpf: e.target.value })
                   }
                 />
-                <a>
+                <a onClick={handleCpfEdit}>
                   <S.SendIcon />
                 </a>
               </div>
