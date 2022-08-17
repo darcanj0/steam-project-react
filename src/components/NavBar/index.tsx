@@ -1,6 +1,8 @@
+import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 import { CurrentPageObject } from "../../types/currentPageObject";
 import { RoutePath } from "../../types/routes";
+import ToastStyle from "../../types/toastStyle";
 import * as S from "./styles";
 
 interface NavBarProps {
@@ -9,6 +11,12 @@ interface NavBarProps {
 
 const NavBar = (props: NavBarProps) => {
   const navigate = useNavigate();
+
+  const handleLogout = (): void => {
+    toast.success("Logout succeeded", ToastStyle);
+    navigate(RoutePath.LOGIN);
+    localStorage.clear();
+  };
 
   return (
     <S.NavBar>
@@ -57,7 +65,7 @@ const NavBar = (props: NavBarProps) => {
       </S.IconGroup>
 
       <S.IconGroup>
-        <S.NavBarIcon onClick={() => navigate(RoutePath.LOGIN)}>
+        <S.NavBarIcon onClick={() => handleLogout()}>
           <S.LogoutIcon />
         </S.NavBarIcon>
       </S.IconGroup>
