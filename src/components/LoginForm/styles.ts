@@ -5,8 +5,8 @@ export const LoginForm = styled.div`
     background: ${theme.colors.tertiaryColorOpacity};
     ${theme.mixins.defaultGlass()}
     ${theme.mixins.logoTitleStyle()}
-    height: 800px;
-    width: 60%;
+    height: 600px;
+    width: 50%;
     position: fixed;
     top: 50%;
     left: 50%;
@@ -17,6 +17,7 @@ export const LoginForm = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
+    overflow-y: auto;
 
     section {
       width: 100%;
@@ -25,6 +26,7 @@ export const LoginForm = styled.div`
       justify-content: center;
       align-items: center;
       gap: 50px;
+      margin: 20px 0;
     }
 
     #inputFields {
