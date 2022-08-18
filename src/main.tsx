@@ -5,13 +5,16 @@ import "./index.css";
 import theme from "./styles/theme";
 import { ThemeProvider } from "styled-components";
 import { BrowserRouter } from "react-router-dom";
+import { AuthProvider } from "./contexts/auth";
 
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
   <React.StrictMode>
-    <ThemeProvider theme={theme}>
-      <BrowserRouter>
-        <App />
-      </BrowserRouter>
-    </ThemeProvider>
+    <BrowserRouter>
+      <AuthProvider>
+        <ThemeProvider theme={theme}>
+          <App />
+        </ThemeProvider>
+      </AuthProvider>
+    </BrowserRouter>
   </React.StrictMode>
 );

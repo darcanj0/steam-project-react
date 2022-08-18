@@ -1,5 +1,6 @@
-import { Dispatch, SetStateAction, useState } from "react";
-import { Route, Routes, Navigate } from "react-router-dom";
+import { Dispatch, SetStateAction } from "react";
+import { Navigate, Route, Routes } from "react-router-dom";
+import { useAuth } from "./contexts/auth";
 import Admin from "./pages/Admin";
 import Home from "./pages/Home/index";
 import Login from "./pages/Login";
@@ -20,7 +21,7 @@ const Router = ({
   currentProfile,
   setCurrentProfile,
 }: RouterProps) => {
-  const [logged, setLogged] = useState(false);
+  const { logged } = useAuth();
 
   return (
     <Routes>
@@ -46,6 +47,12 @@ const Router = ({
           <Route
             path={RoutePath.ADMIN}
             element={<Admin inLightMode={lightMode} />}
+          />
+          <Route
+            path={RoutePath.HOME}
+            element={
+              <Home inLightMode={lightMode} currentProfile={currentProfile} />
+            }
           />
         </>
       ) : (

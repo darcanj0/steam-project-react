@@ -2,6 +2,7 @@ import { useState } from "react";
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 import api from "../../api";
+import { useAuth } from "../../contexts/auth";
 import ToastStyle from "../../types/toastStyle";
 import Button from "../Button";
 import { LogoForLogin } from "../Logo/styles";
@@ -27,6 +28,8 @@ const LoginForm = ({
 }: LoginFormProps) => {
   const navigate = useNavigate();
 
+  const { login } = useAuth();
+
   const [inputsValues, setInputsValues] = useState<SignForm>({
     user_name: "",
     email: "",
@@ -46,13 +49,7 @@ const LoginForm = ({
       .post("/auth", loginInfo)
       .then((res) => {
         if (res.status === 201) {
-          localStorage.setItem("steamProjectToken", res.data.token);
-          localStorage.setItem(
-            "steamProjectUser",
-            JSON.stringify(res.data.user)
-          );
-          toast.success(`Welcome, ${res.data.user.user_name} !`, ToastStyle);
-          navigate("/profileSelection");
+          login({ token: res.data.token, user: res.data.user });
         }
       })
       .catch((err) => {
