@@ -2,6 +2,7 @@ import { useState } from "react";
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 import api from "../../api";
+import { useAuth } from "../../contexts/auth";
 import ToastStyle from "../../types/toastStyle";
 import Button from "../Button";
 import { LogoForLogin } from "../Logo/styles";
@@ -25,7 +26,7 @@ const LoginForm = ({
   creationMode,
   handleCreationModeChange,
 }: LoginFormProps) => {
-  const navigate = useNavigate();
+  const { login } = useAuth();
 
   const [inputsValues, setInputsValues] = useState<SignForm>({
     user_name: "",
@@ -42,17 +43,18 @@ const LoginForm = ({
       password: inputsValues.password,
     };
 
-    try {
-      const response = await api.post("/auth", loginInfo);
-      if (response.status === 201) {
-        localStorage.setItem("steamProjectToken", response.data.token);
-        toast.success(`Welcome, ${response.data.user.user_name} !`, ToastStyle);
-        navigate("/profileSelection");
-      }
-    } catch (error) {
-      toast.error("Something went wrong...", ToastStyle);
-      console.log(error);
-    }
+    api
+      .post("/auth", loginInfo)
+      .then((res) => {
+        if (res.status === 201) {
+          login({ token: res.data.token, user: res.data.user });
+        }
+      })
+      .catch((err) => {
+        err.response.status === 401
+          ? toast.error(err.response.data.message, ToastStyle)
+          : console.error(err);
+      });
   };
 
   const handleUserCreation = async () => {

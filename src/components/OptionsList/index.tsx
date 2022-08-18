@@ -1,5 +1,6 @@
 import OptionItem from "../OptionItem";
 import * as S from "./styles";
+import { v4 as uuidv4 } from "uuid";
 
 interface OptionsListProps {
   options: string[];
@@ -22,6 +23,7 @@ const OptionsList = ({
             onClick={() => {
               setCurrentManager(option);
             }}
+            key={uuidv4()}
           />
         );
       })}

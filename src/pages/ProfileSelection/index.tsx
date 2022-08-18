@@ -1,22 +1,11 @@
-import jwt_decode from "jwt-decode";
-import { Dispatch, SetStateAction, useEffect, useState } from "react";
-import toast from "react-hot-toast";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import api from "../../api";
+import ModalCreateProfile from "../../components/ModalCreateProfile";
 import ProfileCard from "../../components/ProfileCard";
 import SecondaryContainer from "../../components/SecondaryContainer";
-import Profile from "../../types/profiles";
+import { useProfile } from "../../contexts/profile";
 import { RoutePath } from "../../types/routes";
-import ToastStyle from "../../types/toastStyle";
 import * as S from "./styles";
-
-interface decodedJwt {
-  id: string;
-  is_admin: boolean;
-  email: string;
-  iat: number;
-  exp: number;
-}
 
 interface userProfiles {
   id: string;
@@ -25,44 +14,26 @@ interface userProfiles {
 }
 
 interface ProfileSelectionProps {
-  setCurrentProfile: Dispatch<SetStateAction<Profile | undefined>>;
   inLightMode: boolean;
 }
 
-const ProfileSelection = ({ setCurrentProfile }: ProfileSelectionProps) => {
-  const [userProfiles, setUserProfiles] = useState<userProfiles[]>([]);
+const ProfileSelection = ({ inLightMode }: ProfileSelectionProps) => {
+  const { setProfile, userProfiles, getUserProfiles } = useProfile();
+
+  const [showModal, setShowModal] = useState<boolean>(false);
 
   const navigate = useNavigate();
-
-  const getUserProfiles = async () => {
-    try {
-      const decoded: decodedJwt = jwt_decode(
-        localStorage.getItem("steamProjectToken") || ""
-      );
-      const response = await api.get(`/user/${decoded.id}`, {
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem("steamProjectToken")}`,
-        },
-      });
-      setUserProfiles(response.data.profiles);
-    } catch (error) {
-      console.log(error);
-      toast.error(
-        "Something went wrong... You will be redirected to login",
-        ToastStyle
-      );
-    }
-  };
 
   useEffect(() => {
     getUserProfiles();
   }, []);
 
   return (
-    <SecondaryContainer light={false}>
+    <SecondaryContainer light={inLightMode}>
+      {showModal && <ModalCreateProfile setShowModal={setShowModal} />}
       <S.TitleProfileSelection>Who is Playing?</S.TitleProfileSelection>
       <S.ContainerProfileSelection>
-        <S.SwiperCreateProfileCard>
+        <S.SwiperCreateProfileCard onClick={() => setShowModal(true)}>
           <div>
             <span>+</span>
           </div>
@@ -73,7 +44,7 @@ const ProfileSelection = ({ setCurrentProfile }: ProfileSelectionProps) => {
           return (
             <ProfileCard
               onClick={() => {
-                setCurrentProfile(profile);
+                setProfile(profile);
                 navigate(RoutePath.HOME);
               }}
               profile={profile}

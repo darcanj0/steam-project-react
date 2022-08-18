@@ -1,22 +1,12 @@
 import { useEffect, useState } from "react";
-import api from "../../api";
-import Game from "../../types/game";
+import { useGames } from "../../contexts/games";
 import GameCrudCard from "../GameCrudCard";
 import Input from "../Input";
 import * as S from "./styles";
 
 const GameCrudBox = () => {
   const [inputValue, setInputValue] = useState<string>();
-  const [games, setGames] = useState<Game[]>([]);
-
-  const getAllGames = async () => {
-    try {
-      const response = await api.get("/game");
-      setGames(response.data);
-    } catch (error) {
-      console.log(error);
-    }
-  };
+  const { games, getAllGames } = useGames();
 
   useEffect(() => {
     getAllGames();

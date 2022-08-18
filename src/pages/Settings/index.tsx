@@ -15,6 +15,7 @@ import OptionsList from "../../components/OptionsList";
 import SecondaryContainer from "../../components/SecondaryContainer";
 import { RoutePath } from "../../types/routes";
 import ToastStyle from "../../types/toastStyle";
+import User from "../../types/user";
 import * as S from "./styles";
 
 interface userEditInputs {
@@ -41,12 +42,16 @@ const Settings = (props: any) => {
 
   const navigate = useNavigate();
 
+  const user: User = JSON.parse(
+    localStorage.getItem("steamProjectUser") || "{}"
+  );
+
   const [inputsValues, setInputsValues] = useState<userEditInputs>({
-    email: "",
+    email: user.email,
     password: "",
     confirm_password: "",
-    user_name: "",
-    cpf: "",
+    user_name: user.user_name,
+    cpf: user.cpf,
     adm_password: "",
   });
 
