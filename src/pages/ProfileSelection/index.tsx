@@ -21,33 +21,9 @@ interface ProfileSelectionProps {
 }
 
 const ProfileSelection = ({ inLightMode }: ProfileSelectionProps) => {
-  const [userProfiles, setUserProfiles] = useState<userProfiles[]>([]);
-  const { setProfile } = useProfile();
+  const { setProfile, userProfiles, getUserProfiles } = useProfile();
 
   const navigate = useNavigate();
-
-  const getUserProfiles = async () => {
-    const user: User = JSON.parse(
-      localStorage.getItem("steamProjectUser") || "{}"
-    );
-    const headers = {
-      headers: {
-        Authorization: `Bearer ${localStorage.getItem("steamProjectToken")}`,
-      },
-    };
-    api
-      .get(`/user/${user.id}`, headers)
-      .then((res) => {
-        setUserProfiles(res.data.profiles);
-      })
-      .catch((err) => {
-        console.error(err);
-        toast.error(
-          "Something went wrong... You will be redirected to login",
-          ToastStyle
-        );
-      });
-  };
 
   useEffect(() => {
     getUserProfiles();
