@@ -1,5 +1,5 @@
 import { yupResolver } from "@hookform/resolvers/yup";
-import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 import * as yup from "yup";
 import api from "../../api";

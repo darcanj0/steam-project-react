@@ -1,11 +1,11 @@
 import styled, { css } from "styled-components";
 
-export const LoginForm = styled.div`
+export const LoginForm = styled.form`
   ${({ theme }) => css`
     background: ${theme.colors.tertiaryColorOpacity};
     ${theme.mixins.defaultGlass()}
     ${theme.mixins.logoTitleStyle()}
-    height: 600px;
+    height: 37.5rem;
     width: 50%;
     position: fixed;
     top: 50%;
@@ -25,8 +25,8 @@ export const LoginForm = styled.div`
       display: flex;
       justify-content: center;
       align-items: center;
-      gap: 50px;
-      margin: 20px 0;
+      gap: 3.125rem;
+      margin: 1.25rem 0;
     }
 
     #inputFields {
@@ -35,7 +35,7 @@ export const LoginForm = styled.div`
       width: 70%;
       height: 70%;
       justify-content: space-between;
-      gap: 15px;
+      gap: 0.938rem;
     }
 
     .InputField {
@@ -47,23 +47,17 @@ export const LoginForm = styled.div`
       font-size: 1.2rem;
     }
 
-    input {
-      height: 20px;
-      width: 100%;
-      border-radius: ${theme.constants.defaultBorderRadius};
-      border: 1px solid ${theme.colors.glassBorderColor};
-      color: ${theme.colors.whiteTextColor};
-      background-color: ${theme.colors.primaryColorOpacity};
-      padding: 1rem 1rem;
-      font-size: 1.2rem;
-      font-family: ${theme.constants.defaultFontfamily};
-      letter-spacing: 1px;
-      text-align: left;
-      ${theme.mixins.defaultGlass()}
-    }
-
     #formBtns {
       margin: 20px;
     }
+  `}
+`;
+
+export const FormErrors = styled.p`
+  ${({ theme }) => css`
+    ${theme.mixins.titleStyle()}
+    font-size: medium;
+    color: red;
+    align-self: center;
   `}
 `;

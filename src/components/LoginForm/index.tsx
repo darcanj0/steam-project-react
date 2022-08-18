@@ -7,20 +7,29 @@ import ToastStyle from "../../types/toastStyle";
 import Button from "../Button";
 import { LogoForLogin } from "../Logo/styles";
 import * as S from "./styles";
+import * as yup from "yup";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { useForm } from "react-hook-form";
+import { Input } from "../Input/styles";
 
 interface LoginFormProps {
   creationMode: boolean;
   handleCreationModeChange: () => void;
 }
 
-interface SignForm {
-  user_name: string;
+interface handleLoginParams {
   email: string;
   password: string;
-  confirm_password: string;
-  cpf: string;
-  admPassword: string;
 }
+
+const loginSchema = yup.object().shape({
+  email: yup.string().email("Incorrect email format").required(),
+  password: yup
+    .string()
+    .max(32, "Password is too long")
+    .min(8, "Password is too short")
+    .required(),
+});
 
 const LoginForm = ({
   creationMode,
@@ -28,21 +37,17 @@ const LoginForm = ({
 }: LoginFormProps) => {
   const { login } = useAuth();
 
-  const [inputsValues, setInputsValues] = useState<SignForm>({
-    user_name: "",
-    email: "",
-    password: "",
-    confirm_password: "",
-    cpf: "",
-    admPassword: "",
-  });
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({ resolver: yupResolver(loginSchema) });
 
-  const handleLogin = async () => {
-    const loginInfo: Partial<SignForm> = {
-      email: inputsValues.email,
-      password: inputsValues.password,
+  const handleLogin = (data: handleLoginParams) => {
+    const loginInfo: handleLoginParams = {
+      email: data.email,
+      password: data.password,
     };
-
     api
       .post("/auth", loginInfo)
       .then((res) => {
@@ -57,139 +62,48 @@ const LoginForm = ({
       });
   };
 
-  const handleUserCreation = async () => {
-    const userCreationInfo = {
-      email: inputsValues.email,
-      user_name: inputsValues.user_name,
-      password: inputsValues.password,
-      confirm_password: inputsValues.confirm_password,
-      cpf: inputsValues.cpf,
-      is_admin: inputsValues.admPassword === "asterixobelix123" ? true : false,
-    };
-
-    try {
-      const response = await api.post("/user", userCreationInfo);
-      if (response.status === 201) {
-        toast.success(
-          `Hello, ${response.data.user_name}, your account was successfully created !`,
-          ToastStyle
-        );
-        handleCreationModeChange();
-      }
-    } catch (error) {
-      toast.error("Something went wrong...", ToastStyle);
-      console.log(error);
-    }
-  };
-
   return (
-    <S.LoginForm>
-      <section>
-        <LogoForLogin />
-        <span>Steam Project</span>
-      </section>
-      <div id="loginFields">
-        <div className="InputField">
-          <label htmlFor="email">E-mail</label>
-          <input
-            value={inputsValues.email}
-            onChange={(e) =>
-              setInputsValues({ ...inputsValues, email: e.target.value })
-            }
-            type="email"
-            name="email"
-            id=""
-          />
-        </div>
-
-        <div className="InputField">
-          <label htmlFor="password">Password</label>
-          <input
-            type="password"
-            name="password"
-            value={inputsValues.password}
-            onChange={(e) =>
-              setInputsValues({ ...inputsValues, password: e.target.value })
-            }
-          />
-        </div>
-
-        {creationMode === true && (
-          <>
+    <>
+      {creationMode ? (
+        <S.LoginForm></S.LoginForm>
+      ) : (
+        <S.LoginForm onSubmit={handleSubmit(handleLogin)}>
+          <section>
+            <LogoForLogin />
+            <span>Steam Project</span>
+          </section>
+          <div id="inputFields">
             <div className="InputField">
-              <label htmlFor="confirmPassword">Confirm Password</label>
-              <input
-                type="password"
-                name="password"
-                onChange={(e) =>
-                  setInputsValues({
-                    ...inputsValues,
-                    confirm_password: e.target.value,
-                  })
-                }
-              />
+              <label htmlFor="email">E-mail</label>
+              <Input type="text" inputSize="large" {...register("email")} />
             </div>
 
             <div className="InputField">
-              <label htmlFor="user_name">User Name</label>
-              <input
-                type="text"
-                name="user_name"
-                value={inputsValues.user_name}
-                onChange={(e) =>
-                  setInputsValues({
-                    ...inputsValues,
-                    user_name: e.target.value,
-                  })
-                }
-              />
-            </div>
-
-            <div>
-              <label htmlFor="cpf">CPF</label>
-              <input
-                type={"number"}
-                name="cpf"
-                id=""
-                value={inputsValues.cpf}
-                onChange={(e) =>
-                  setInputsValues({ ...inputsValues, cpf: e.target.value })
-                }
-              />
-            </div>
-
-            <div>
-              <label htmlFor="admPass">Manager Password</label>
-              <input
+              <label htmlFor="password">Password</label>
+              <Input
                 type="password"
-                name="admPass"
-                id=""
-                value={inputsValues.admPassword}
-                onChange={(e) =>
-                  setInputsValues({
-                    ...inputsValues,
-                    admPassword: e.target.value,
-                  })
-                }
+                inputSize="large"
+                {...register("password")}
               />
             </div>
-          </>
-        )}
 
-        <div id="formBtns">
-          <Button onClick={() => handleCreationModeChange()}>
-            {creationMode ? "Go Back" : "Don't have an account yet?"}
-          </Button>
-          <Button
-            onClick={() => {
-              creationMode ? handleUserCreation() : handleLogin();
-            }}
-          >
-            {creationMode ? "Sign Up" : "Sign In"}
-          </Button>
-        </div>
-      </div>
-    </S.LoginForm>
+            {errors.email && (
+              <S.FormErrors>{String(errors.email.message)}</S.FormErrors>
+            )}
+            {errors.password && (
+              <S.FormErrors>{String(errors.password.message)}</S.FormErrors>
+            )}
+
+            <div id="formBtns">
+              <Button onClick={() => handleCreationModeChange()}>
+                {creationMode ? "Go Back" : "Don't have an account yet?"}
+              </Button>
+              <Button type="submit">Sign In</Button>
+            </div>
+          </div>
+        </S.LoginForm>
+      )}
+    </>
   );
 };
 
