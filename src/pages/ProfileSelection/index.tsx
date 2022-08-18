@@ -8,6 +8,7 @@ import SecondaryContainer from "../../components/SecondaryContainer";
 import Profile from "../../types/profiles";
 import { RoutePath } from "../../types/routes";
 import ToastStyle from "../../types/toastStyle";
+import User from "../../types/user";
 import * as S from "./styles";
 
 interface decodedJwt {
@@ -35,23 +36,26 @@ const ProfileSelection = ({ setCurrentProfile }: ProfileSelectionProps) => {
   const navigate = useNavigate();
 
   const getUserProfiles = async () => {
-    try {
-      const decoded: decodedJwt = jwt_decode(
-        localStorage.getItem("steamProjectToken") || ""
-      );
-      const response = await api.get(`/user/${decoded.id}`, {
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem("steamProjectToken")}`,
-        },
+    const user: User = JSON.parse(
+      localStorage.getItem("steamProjectUser") || "{}"
+    );
+    const headers = {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("steamProjectToken")}`,
+      },
+    };
+    api
+      .get(`/user/${user.id}`, headers)
+      .then((res) => {
+        setUserProfiles(res.data.profiles);
+      })
+      .catch((err) => {
+        console.error(err);
+        toast.error(
+          "Something went wrong... You will be redirected to login",
+          ToastStyle
+        );
       });
-      setUserProfiles(response.data.profiles);
-    } catch (error) {
-      console.log(error);
-      toast.error(
-        "Something went wrong... You will be redirected to login",
-        ToastStyle
-      );
-    }
   };
 
   useEffect(() => {
