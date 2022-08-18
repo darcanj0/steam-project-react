@@ -1,7 +1,5 @@
 import { useEffect, useState } from "react";
-import api from "../../api";
 import { useGenres } from "../../contexts/genres";
-import Genre from "../../types/genres";
 import GenreCrudCard from "../GenreCrudCard";
 import Input from "../Input";
 import * as S from "./styles";
