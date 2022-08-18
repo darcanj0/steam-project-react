@@ -1,23 +1,14 @@
-import jwt_decode from "jwt-decode";
-import { Dispatch, SetStateAction, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 import api from "../../api";
 import ProfileCard from "../../components/ProfileCard";
 import SecondaryContainer from "../../components/SecondaryContainer";
-import Profile from "../../types/profiles";
+import { useProfile } from "../../contexts/profile";
 import { RoutePath } from "../../types/routes";
 import ToastStyle from "../../types/toastStyle";
 import User from "../../types/user";
 import * as S from "./styles";
-
-interface decodedJwt {
-  id: string;
-  is_admin: boolean;
-  email: string;
-  iat: number;
-  exp: number;
-}
 
 interface userProfiles {
   id: string;
@@ -26,12 +17,12 @@ interface userProfiles {
 }
 
 interface ProfileSelectionProps {
-  setCurrentProfile: Dispatch<SetStateAction<Profile | undefined>>;
   inLightMode: boolean;
 }
 
-const ProfileSelection = ({ setCurrentProfile }: ProfileSelectionProps) => {
+const ProfileSelection = ({ inLightMode }: ProfileSelectionProps) => {
   const [userProfiles, setUserProfiles] = useState<userProfiles[]>([]);
+  const { setProfile } = useProfile();
 
   const navigate = useNavigate();
 
@@ -63,7 +54,7 @@ const ProfileSelection = ({ setCurrentProfile }: ProfileSelectionProps) => {
   }, []);
 
   return (
-    <SecondaryContainer light={false}>
+    <SecondaryContainer light={inLightMode}>
       <S.TitleProfileSelection>Who is Playing?</S.TitleProfileSelection>
       <S.ContainerProfileSelection>
         <S.SwiperCreateProfileCard>
@@ -77,7 +68,7 @@ const ProfileSelection = ({ setCurrentProfile }: ProfileSelectionProps) => {
           return (
             <ProfileCard
               onClick={() => {
-                setCurrentProfile(profile);
+                setProfile(profile);
                 navigate(RoutePath.HOME);
               }}
               profile={profile}

@@ -16,22 +16,23 @@ import SwiperContainer from "../../components/SwiperContainer";
 import { useAuth } from "../../contexts/auth";
 import { useGames } from "../../contexts/games";
 import { useGenres } from "../../contexts/genres";
+import { useProfile } from "../../contexts/profile";
 import Favorite from "../../types/favorite";
 import Game from "../../types/game";
-import Profile from "../../types/profiles";
 import ToastStyle from "../../types/toastStyle";
 
 interface HomeProps {
   inLightMode: boolean;
-  currentProfile: Profile | undefined;
 }
 
-const Home = ({ inLightMode, currentProfile }: HomeProps) => {
+const Home = ({ inLightMode }: HomeProps) => {
   const { games, getAllGames } = useGames();
   const { genres, getAllGenres } = useGenres();
   const [favorites, setFavorites] = useState<Favorite[]>([]);
 
   const { logged } = useAuth();
+
+  const { profile } = useProfile();
 
   const getProfileFavorites = async () => {
     if (!logged) return;
@@ -42,7 +43,7 @@ const Home = ({ inLightMode, currentProfile }: HomeProps) => {
       },
     };
     api
-      .get(`/favorite/${currentProfile?.id}`, headers)
+      .get(`/favorite/${profile.id}`, headers)
       .then((res) => {
         setFavorites(res.data);
       })
