@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import api from "../../api";
+import { useGenres } from "../../contexts/genres";
 import Genre from "../../types/genres";
 import GenreCrudCard from "../GenreCrudCard";
 import Input from "../Input";
@@ -7,16 +8,7 @@ import * as S from "./styles";
 
 const GenreCrudBox = () => {
   const [inputValue, setInputValue] = useState<string>();
-  const [genres, setGenres] = useState<Genre[]>([]);
-
-  const getAllGenres = async () => {
-    try {
-      const response = await api.get("/genre");
-      setGenres(response.data);
-    } catch (error) {
-      console.log(error);
-    }
-  };
+  const { genres, getAllGenres } = useGenres();
 
   useEffect(() => {
     getAllGenres();
@@ -45,7 +37,7 @@ const GenreCrudBox = () => {
 
       <div id="genreList">
         {genres.map((genre) => {
-          return <GenreCrudCard genre={genre} />;
+          return <GenreCrudCard genre={genre} key={genre.id} />;
         })}
       </div>
     </S.GenreCrudBox>

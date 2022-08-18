@@ -14,6 +14,7 @@ import NavBar from "../../components/NavBar";
 import NewRelease from "../../components/NewRelease";
 import SwiperContainer from "../../components/SwiperContainer";
 import { useAuth } from "../../contexts/auth";
+import { useGenres } from "../../contexts/genres";
 import Favorite from "../../types/favorite";
 import Game from "../../types/game";
 import Genre from "../../types/genres";
@@ -27,7 +28,7 @@ interface HomeProps {
 
 const Home = ({ inLightMode, currentProfile }: HomeProps) => {
   const [games, setGames] = useState<Game[]>([]);
-  const [genres, setGenres] = useState<Genre[]>([]);
+  const { genres, getAllGenres } = useGenres();
   const [favorites, setFavorites] = useState<Favorite[]>([]);
 
   const { logged } = useAuth();
@@ -38,16 +39,6 @@ const Home = ({ inLightMode, currentProfile }: HomeProps) => {
       setGames(response.data);
     } catch (error) {
       toast.error("We couldn't load our games", ToastStyle);
-      console.log(error);
-    }
-  };
-
-  const getAllGenres = async () => {
-    try {
-      const response = await api.get("/genre");
-      setGenres(response.data);
-    } catch (error) {
-      toast.error("We couldn't load our game genres", ToastStyle);
       console.log(error);
     }
   };
@@ -72,8 +63,8 @@ const Home = ({ inLightMode, currentProfile }: HomeProps) => {
   };
 
   useEffect(() => {
-    getAllGames();
     getAllGenres();
+    getAllGames();
     getProfileFavorites();
   }, []);
 

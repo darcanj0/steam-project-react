@@ -7,7 +7,6 @@ import {
 } from "react";
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
-import { json } from "stream/consumers";
 import api from "../../api";
 import { RoutePath } from "../../types/routes";
 import ToastStyle from "../../types/toastStyle";

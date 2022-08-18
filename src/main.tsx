@@ -6,14 +6,17 @@ import theme from "./styles/theme";
 import { ThemeProvider } from "styled-components";
 import { BrowserRouter } from "react-router-dom";
 import { AuthProvider } from "./contexts/auth";
+import { GenreProvider } from "./contexts/genres";
 
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
   <React.StrictMode>
     <BrowserRouter>
       <AuthProvider>
-        <ThemeProvider theme={theme}>
-          <App />
-        </ThemeProvider>
+        <GenreProvider>
+          <ThemeProvider theme={theme}>
+            <App />
+          </ThemeProvider>
+        </GenreProvider>
       </AuthProvider>
     </BrowserRouter>
   </React.StrictMode>
