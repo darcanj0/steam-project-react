@@ -61,6 +61,7 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
       .get(`user/${user.id}`, headers)
       .then(() => {
         setLogged(true);
+        navigate(RoutePath.PROFILESELECTION);
       })
       .catch((err) => {
         console.error(err);
