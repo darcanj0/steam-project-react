@@ -69,18 +69,14 @@ const ModalCreateProfile = ({ setShowModal }: ModalCreateProfileProps) => {
             <S.CloseModalIcon />
           </a>
         </section>
-        <Input
-          type="text"
-          placeholder={"Gamer tag"}
-          {...register("gamer_tag")}
-          autoComplete="off"
-        />
-        <Input
-          type="text"
-          placeholder={"Profile picture url"}
-          {...register("image_url")}
-          autoComplete="off"
-        />
+        <div>
+          <label htmlFor="gamer_tag">Gamer tag</label>
+          <Input type="text" {...register("gamer_tag")} autoComplete="off" />
+        </div>
+        <div>
+          <label htmlFor="image_url">Profile picture</label>
+          <Input type="text" {...register("image_url")} autoComplete="off" />
+        </div>
         {errors.gamer_tag && (
           <S.FormErrors>{String(errors.gamer_tag.message)}</S.FormErrors>
         )}

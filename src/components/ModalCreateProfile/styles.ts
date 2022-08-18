@@ -5,8 +5,8 @@ export const ModalCreateProfile = styled.form`
   ${({ theme }) => css`
     background: ${theme.colors.tertiaryColorOpacity};
     ${theme.mixins.defaultGlass()}
-    height: 500px;
-    width: 500px;
+    height: 31.25rem;
+    width: 31.25rem;
     border: 1px solid ${theme.colors.glassBorderColor};
     border-radius: ${theme.constants.defaultBorderRadius};
     display: flex;
@@ -32,6 +32,19 @@ export const ModalCreateProfile = styled.form`
         ${theme.mixins.headingStyle}
         color: ${theme.colors.whiteTextColor};
         font-size: x-large;
+      }
+    }
+
+    div {
+      width: 100%;
+      height: 4.375rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      label {
+        ${theme.mixins.titleStyle()}
+        font-weight: 400;
+        font-size: 1.2rem;
       }
     }
   `}
