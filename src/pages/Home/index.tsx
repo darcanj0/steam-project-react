@@ -14,10 +14,10 @@ import NavBar from "../../components/NavBar";
 import NewRelease from "../../components/NewRelease";
 import SwiperContainer from "../../components/SwiperContainer";
 import { useAuth } from "../../contexts/auth";
+import { useGames } from "../../contexts/games";
 import { useGenres } from "../../contexts/genres";
 import Favorite from "../../types/favorite";
 import Game from "../../types/game";
-import Genre from "../../types/genres";
 import Profile from "../../types/profiles";
 import ToastStyle from "../../types/toastStyle";
 
@@ -27,21 +27,11 @@ interface HomeProps {
 }
 
 const Home = ({ inLightMode, currentProfile }: HomeProps) => {
-  const [games, setGames] = useState<Game[]>([]);
+  const { games, getAllGames } = useGames();
   const { genres, getAllGenres } = useGenres();
   const [favorites, setFavorites] = useState<Favorite[]>([]);
 
   const { logged } = useAuth();
-
-  const getAllGames = async () => {
-    try {
-      const response = await api.get("/game");
-      setGames(response.data);
-    } catch (error) {
-      toast.error("We couldn't load our games", ToastStyle);
-      console.log(error);
-    }
-  };
 
   const getProfileFavorites = async () => {
     if (!logged) return;
