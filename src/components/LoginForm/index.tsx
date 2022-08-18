@@ -26,8 +26,6 @@ const LoginForm = ({
   creationMode,
   handleCreationModeChange,
 }: LoginFormProps) => {
-  const navigate = useNavigate();
-
   const { login } = useAuth();
 
   const [inputsValues, setInputsValues] = useState<SignForm>({

@@ -1,6 +1,11 @@
+import { ReactNode } from "react";
 import * as S from "./styles";
 
-const ModalOverlay = ({ children }: any) => {
+interface ModalOverlayProps {
+  children: ReactNode;
+}
+
+const ModalOverlay = ({ children }: ModalOverlayProps) => {
   return <S.ModalOverlay>{children}</S.ModalOverlay>;
 };
 

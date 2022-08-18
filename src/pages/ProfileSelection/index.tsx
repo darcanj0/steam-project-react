@@ -1,13 +1,10 @@
 import { useEffect, useState } from "react";
-import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
-import api from "../../api";
+import ModalCreateProfile from "../../components/ModalCreateProfile";
 import ProfileCard from "../../components/ProfileCard";
 import SecondaryContainer from "../../components/SecondaryContainer";
 import { useProfile } from "../../contexts/profile";
 import { RoutePath } from "../../types/routes";
-import ToastStyle from "../../types/toastStyle";
-import User from "../../types/user";
 import * as S from "./styles";
 
 interface userProfiles {
@@ -23,6 +20,8 @@ interface ProfileSelectionProps {
 const ProfileSelection = ({ inLightMode }: ProfileSelectionProps) => {
   const { setProfile, userProfiles, getUserProfiles } = useProfile();
 
+  const [showModal, setShowModal] = useState<boolean>(false);
+
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -31,9 +30,10 @@ const ProfileSelection = ({ inLightMode }: ProfileSelectionProps) => {
 
   return (
     <SecondaryContainer light={inLightMode}>
+      {showModal && <ModalCreateProfile setShowModal={setShowModal} />}
       <S.TitleProfileSelection>Who is Playing?</S.TitleProfileSelection>
       <S.ContainerProfileSelection>
-        <S.SwiperCreateProfileCard>
+        <S.SwiperCreateProfileCard onClick={() => setShowModal(true)}>
           <div>
             <span>+</span>
           </div>
