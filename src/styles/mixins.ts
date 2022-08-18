@@ -31,7 +31,7 @@ const footerStyle = () => css`
 `;
 
 const overlay = () => css`
-  background: rgba(0, 0, 0, 0.25);
+  background: rgba(0, 0, 0, 0.3);
   position: absolute;
   top: 0;
   left: 0;
