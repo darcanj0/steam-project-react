@@ -1,4 +1,3 @@
-import { Dispatch, SetStateAction } from "react";
 import { Navigate, Route, Routes } from "react-router-dom";
 import { useAuth } from "./contexts/auth";
 import Admin from "./pages/Admin";
@@ -7,20 +6,13 @@ import Login from "./pages/Login";
 import Profiles from "./pages/Profiles";
 import ProfileSelection from "./pages/ProfileSelection";
 import Settings from "./pages/Settings";
-import Profile from "./types/profiles";
 import { RoutePath } from "./types/routes";
 
 interface RouterProps {
   lightMode: boolean;
-  currentProfile: Profile | undefined;
-  setCurrentProfile: Dispatch<SetStateAction<Profile | undefined>>;
 }
 
-const Router = ({
-  lightMode,
-  currentProfile,
-  setCurrentProfile,
-}: RouterProps) => {
+const Router = ({ lightMode }: RouterProps) => {
   const { logged } = useAuth();
 
   return (
@@ -33,12 +25,7 @@ const Router = ({
           />
           <Route
             path={RoutePath.PROFILESELECTION}
-            element={
-              <ProfileSelection
-                inLightMode={lightMode}
-                setCurrentProfile={setCurrentProfile}
-              />
-            }
+            element={<ProfileSelection inLightMode={lightMode} />}
           />
           <Route
             path={RoutePath.SETTINGS}
@@ -50,18 +37,14 @@ const Router = ({
           />
           <Route
             path={RoutePath.HOME}
-            element={
-              <Home inLightMode={lightMode} currentProfile={currentProfile} />
-            }
+            element={<Home inLightMode={lightMode} />}
           />
         </>
       ) : (
         <>
           <Route
             path={RoutePath.HOME}
-            element={
-              <Home inLightMode={lightMode} currentProfile={currentProfile} />
-            }
+            element={<Home inLightMode={lightMode} />}
           />
           <Route
             path={RoutePath.LOGIN}
