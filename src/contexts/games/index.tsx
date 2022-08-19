@@ -2,6 +2,7 @@ import { createContext, ReactNode, useContext, useState } from "react";
 import toast from "react-hot-toast";
 import api from "../../api";
 import Game from "../../types/game";
+import ToastStyle from "../../types/toastStyle";
 
 interface GameProviderProps {
   children: ReactNode;
@@ -23,7 +24,7 @@ export const GameProvider = ({ children }: GameProviderProps) => {
         setGames(res.data);
       })
       .catch((err) => {
-        toast.error("There was a problem when reading games...");
+        toast.error("There was a problem when reading games...", ToastStyle);
         console.error(err);
       });
   };
