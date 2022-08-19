@@ -13,6 +13,7 @@ import Input from "../../components/Input";
 import NavBar from "../../components/NavBar";
 import OptionsList from "../../components/OptionsList";
 import SecondaryContainer from "../../components/SecondaryContainer";
+import { useAuth } from "../../contexts/auth";
 import { RoutePath } from "../../types/routes";
 import ToastStyle from "../../types/toastStyle";
 import User from "../../types/user";
@@ -27,20 +28,14 @@ interface userEditInputs {
   adm_password: string;
 }
 
-interface decodedJwt {
-  id: string;
-  is_admin: boolean;
-  email: string;
-  iat: number;
-  exp: number;
-}
-
 const Settings = (props: any) => {
   const options = ["User information"];
   const [currentManager, setCurrentManager] = useState<string>(options[0]);
   const [showAlert, setShowAlert] = useState<boolean>(false);
 
   const navigate = useNavigate();
+
+  const { logout, login } = useAuth();
 
   const user: User = JSON.parse(
     localStorage.getItem("steamProjectUser") || "{}"
@@ -55,53 +50,131 @@ const Settings = (props: any) => {
     adm_password: "",
   });
 
-  const decoded: decodedJwt = jwt_decode(
-    localStorage.getItem("steamProjectToken") || ""
-  );
-
   const headers = {
     headers: {
       Authorization: `Bearer ${localStorage.getItem("steamProjectToken")}`,
     },
   };
 
-  const handleEmailEdit = async () => {
-    try {
-      const dto = { email: inputsValues.email };
-      api.patch(`/user/${decoded.id}`, dto, headers).then((res) => {
-        toast.success("Email successfully changed", ToastStyle);
-        toast("You will be redirected to login", ToastStyle);
+  const handleEmailEdit = () => {
+    if (user.email === inputsValues.email) return;
+    const dto = { email: inputsValues.email };
+    api
+      .patch(`/user/${user.id}`, dto, headers)
+      .then((res) => {
+        if (res.status === 200) {
+          toast.success("Email successfully changed", ToastStyle);
+          logout("Please, log in again with your new email.");
+        }
+      })
+      .catch((err) => {
+        console.error(err);
+        setShowAlert(true);
+        if (err.response.status === 422) {
+          toast.error("Email already in use", ToastStyle);
+        } else {
+          toast.error("Something went wrong...", ToastStyle);
+        }
       });
-      navigate(RoutePath.LOGIN);
-    } catch (error: any) {
-      toast.error("Something went wrong", ToastStyle);
-      console.log(error);
-    }
   };
 
-  const handleUserNameEdit = async () => {
-    try {
-      const dto = { user_name: inputsValues.user_name };
-      api.patch(`/user/${decoded.id}`, dto, headers).then((res) => {
-        toast.success("User name successfully changed", ToastStyle);
-        toast(`Hello, ${inputsValues.user_name}`, ToastStyle);
+  const handleUserNameEdit = () => {
+    if (user.user_name === inputsValues.user_name) return;
+    const dto = { user_name: inputsValues.user_name };
+    api
+      .patch(`/user/${user.id}`, dto, headers)
+      .then((res) => {
+        if (res.status === 200) {
+          toast.success("User name successfully changed", ToastStyle);
+          const newUser: User = { ...user, user_name: inputsValues.user_name };
+          login({
+            token: localStorage.getItem("steamProjectToken") || "",
+            user: newUser,
+          });
+        }
+      })
+      .catch((err) => {
+        console.error(err);
+        setShowAlert(true);
+        toast.error("Something went wrong...", ToastStyle);
       });
-    } catch (error) {
-      toast.error("Something went wrong", ToastStyle);
-      console.log(error);
-    }
   };
 
-  const handleCpfEdit = async () => {
-    try {
-      const dto = { cpf: inputsValues.cpf };
-      api.patch(`/user/${decoded.id}`, dto, headers).then((res) => {
-        toast.success("CPF successfully changed", ToastStyle);
+  const handleCpfEdit = () => {
+    if (user.cpf === inputsValues.cpf) return;
+    const dto = { cpf: inputsValues.cpf };
+    api
+      .patch(`/user/${user.id}`, dto, headers)
+      .then((res) => {
+        if (res.status === 200) {
+          toast.success("CPF successfully changed", ToastStyle);
+          const newUser: User = { ...user, cpf: inputsValues.cpf };
+          login({
+            token: localStorage.getItem("steamProjectToken") || "",
+            user: newUser,
+          });
+        }
+      })
+      .catch((err) => {
+        console.error(err);
+        setShowAlert(true);
+        toast.error("Something went wrong...", ToastStyle);
       });
-    } catch (error) {
-      toast.error("Something went wrong", ToastStyle);
-      console.log(error);
+  };
+
+  const handlePasswordEdit = () => {
+    if (
+      !inputsValues.password ||
+      !inputsValues.confirm_password ||
+      inputsValues.password != inputsValues.confirm_password
+    ) {
+      setShowAlert(true);
+      return;
     }
+    const dto = {
+      password: inputsValues.password,
+      confirm_password: inputsValues.confirm_password,
+    };
+    api
+      .patch(`/user/${user.id}`, dto, headers)
+      .then((res) => {
+        if (res.status === 200) {
+          toast.success("Password successfully changed", ToastStyle);
+          logout("Please, log in again with your new password.");
+        }
+      })
+      .catch((err) => {
+        console.error(err);
+        setShowAlert(true);
+        toast.error("Something went wrong...", ToastStyle);
+      });
+  };
+
+  const handleAdminPassEdit = () => {
+    if (inputsValues.adm_password != "secretPassForAdmin") {
+      toast.error("Incorrect administrator password", ToastStyle);
+      return;
+    }
+    const dto = {
+      is_admin: true,
+    };
+    api
+      .patch(`/user/${user.id}`, dto, headers)
+      .then((res) => {
+        if (res.status === 200) {
+          toast.success("Administrator permit granted", ToastStyle);
+          const newUser: User = { ...user, is_admin: true };
+          login({
+            token: localStorage.getItem("steamProjectToken") || "",
+            user: newUser,
+          });
+        }
+      })
+      .catch((err) => {
+        console.error(err);
+        setShowAlert(true);
+        toast.error("Something went wrong...", ToastStyle);
+      });
   };
 
   return (
@@ -125,7 +198,7 @@ const Settings = (props: any) => {
           />
           {currentManager === "User information" && (
             <S.UserForm>
-              <div>
+              <form>
                 <label htmlFor="">E-mail</label>
                 <Input
                   inputSize="x-large"
@@ -138,14 +211,14 @@ const Settings = (props: any) => {
                 <a onClick={handleEmailEdit}>
                   <S.SendIcon />
                 </a>
-              </div>
+              </form>
               {showAlert && (
                 <span>
                   <FiAlertTriangle /> Must be a valid and avaliable e-mail
                 </span>
               )}
 
-              <div>
+              <form>
                 <label htmlFor="">User Name</label>
                 <Input
                   inputSize="x-large"
@@ -161,7 +234,7 @@ const Settings = (props: any) => {
                 <a onClick={handleUserNameEdit}>
                   <S.SendIcon />
                 </a>
-              </div>
+              </form>
               {showAlert && (
                 <span>
                   <FiAlertTriangle /> Must be at least 3 and at max 30
@@ -169,7 +242,7 @@ const Settings = (props: any) => {
                 </span>
               )}
 
-              <div>
+              <form>
                 <label htmlFor="">CPF</label>
                 <Input
                   inputSize="x-large"
@@ -182,7 +255,7 @@ const Settings = (props: any) => {
                 <a onClick={handleCpfEdit}>
                   <S.SendIcon />
                 </a>
-              </div>
+              </form>
               {showAlert && (
                 <span>
                   <FiAlertTriangle /> Must be avaliable and have 11 characters
@@ -190,9 +263,10 @@ const Settings = (props: any) => {
                 </span>
               )}
 
-              <div>
+              <form>
                 <label htmlFor="">Password</label>
                 <Input
+                  type="password"
                   inputSize="small"
                   placeholder="Change password"
                   value={inputsValues.password}
@@ -206,6 +280,7 @@ const Settings = (props: any) => {
 
                 <label htmlFor="">Confirm Password</label>
                 <Input
+                  type="password"
                   inputSize="small"
                   placeholder="Confirm password"
                   value={inputsValues.confirm_password}
@@ -216,10 +291,10 @@ const Settings = (props: any) => {
                     })
                   }
                 />
-                <a>
+                <a onClick={handlePasswordEdit}>
                   <S.SendIcon />
                 </a>
-              </div>
+              </form>
               {showAlert && (
                 <span>
                   <FiAlertTriangle /> Must be between 8 and 32 characters long
@@ -228,9 +303,10 @@ const Settings = (props: any) => {
                 </span>
               )}
 
-              <div>
+              <form>
                 <label htmlFor="">Manager Password</label>
                 <Input
+                  type="password"
                   inputSize="x-large"
                   placeholder="Manager password"
                   value={inputsValues.adm_password}
@@ -241,10 +317,10 @@ const Settings = (props: any) => {
                     })
                   }
                 />
-                <a>
+                <a onClick={handleAdminPassEdit}>
                   <S.SendIcon />
                 </a>
-              </div>
+              </form>
               {showAlert && (
                 <span>
                   <FiAlertTriangle /> Secret manager password

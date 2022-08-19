@@ -7,12 +7,6 @@ import { useProfile } from "../../contexts/profile";
 import { RoutePath } from "../../types/routes";
 import * as S from "./styles";
 
-interface userProfiles {
-  id: string;
-  gamer_tag: string;
-  image_url: string;
-}
-
 interface ProfileSelectionProps {
   inLightMode: boolean;
 }

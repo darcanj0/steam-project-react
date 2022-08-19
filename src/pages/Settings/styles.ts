@@ -20,7 +20,7 @@ export const UserForm = styled.div`
       font-size: 1.15rem;
     }
 
-    div {
+    form {
       width: 100%;
       display: flex;
       align-items: center;

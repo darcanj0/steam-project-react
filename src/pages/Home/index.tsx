@@ -156,48 +156,55 @@ const Home = ({ inLightMode }: HomeProps) => {
 
         {genres.map((genre) => {
           return (
-            <>
-              <HomeHeading>{genre.genre_title}</HomeHeading>
-              <SwiperContainer>
-                <Swiper
-                  effect={"coverflow"}
-                  spaceBetween={0}
-                  slidesPerView={3}
-                  centeredSlides={true}
-                  rewind={true}
-                  modules={[Navigation, EffectCoverflow, Autoplay]}
-                  autoplay={{
-                    disableOnInteraction: false,
-                    delay: 8000,
-                    pauseOnMouseEnter: true,
-                    waitForTransition: false,
-                  }}
-                  navigation
-                  grabCursor={true}
-                  coverflowEffect={{
-                    rotate: 30,
-                    stretch: 0,
-                    depth: 70,
-                    modifier: 1,
-                    slideShadows: false,
-                  }}
-                >
-                  {games
-                    .filter((game) =>
-                      game.genres.some(
-                        (genreObj) => genreObj.genre_title === genre.genre_title
+            games.filter((game) =>
+              game.genres.some(
+                (genreObj) => genreObj.genre_title === genre.genre_title
+              )
+            ).length >= 3 && (
+              <>
+                <HomeHeading>{genre.genre_title}</HomeHeading>
+                <SwiperContainer>
+                  <Swiper
+                    effect={"coverflow"}
+                    spaceBetween={0}
+                    slidesPerView={3}
+                    centeredSlides={true}
+                    rewind={true}
+                    modules={[Navigation, EffectCoverflow, Autoplay]}
+                    autoplay={{
+                      disableOnInteraction: false,
+                      delay: 8000,
+                      pauseOnMouseEnter: true,
+                      waitForTransition: false,
+                    }}
+                    navigation
+                    grabCursor={true}
+                    coverflowEffect={{
+                      rotate: 30,
+                      stretch: 0,
+                      depth: 70,
+                      modifier: 1,
+                      slideShadows: false,
+                    }}
+                  >
+                    {games
+                      .filter((game) =>
+                        game.genres.some(
+                          (genreObj) =>
+                            genreObj.genre_title === genre.genre_title
+                        )
                       )
-                    )
-                    .map((filteredGame) => {
-                      return (
-                        <SwiperSlide>
-                          <GameHomeCard game={filteredGame} />
-                        </SwiperSlide>
-                      );
-                    })}
-                </Swiper>
-              </SwiperContainer>
-            </>
+                      .map((filteredGame) => {
+                        return (
+                          <SwiperSlide>
+                            <GameHomeCard game={filteredGame} />
+                          </SwiperSlide>
+                        );
+                      })}
+                  </Swiper>
+                </SwiperContainer>
+              </>
+            )
           );
         })}
       </ContentBox>
