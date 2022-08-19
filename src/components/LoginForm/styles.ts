@@ -48,6 +48,7 @@ export const LoginForm = styled.form`
     }
 
     #formBtns {
+      display: flex;
       margin: 20px;
     }
   `}
