@@ -306,6 +306,7 @@ const Settings = (props: any) => {
               <form>
                 <label htmlFor="">Manager Password</label>
                 <Input
+                  type="password"
                   inputSize="x-large"
                   placeholder="Manager password"
                   value={inputsValues.adm_password}
