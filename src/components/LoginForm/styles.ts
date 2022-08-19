@@ -25,22 +25,22 @@ export const LoginForm = styled.form`
       display: flex;
       justify-content: center;
       align-items: center;
-      gap: 3.125rem;
-      margin: 1.25rem 0;
+      gap: 3rem;
+      margin: 1rem 0;
     }
 
     #inputFields {
       display: flex;
       flex-direction: column;
       width: 70%;
-      height: 70%;
+      min-height: 70%;
       justify-content: space-between;
       gap: 0.938rem;
     }
 
     .InputField {
       width: 100%;
-      gap: 20px;
+      gap: 1.25rem;
     }
 
     label {
@@ -49,7 +49,7 @@ export const LoginForm = styled.form`
 
     #formBtns {
       display: flex;
-      margin: 20px;
+      margin: 1.25rem;
     }
   `}
 `;
