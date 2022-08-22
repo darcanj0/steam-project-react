@@ -5,12 +5,18 @@ import Input from "../Input";
 import * as S from "./styles";
 
 const GenreCrudBox = () => {
-  const [inputValue, setInputValue] = useState<string>();
+  const [inputValue, setInputValue] = useState<string>("");
   const { genres, getAllGenres } = useGenres();
+  const [filtered, setFiltered] = useState(false);
 
   useEffect(() => {
     getAllGenres();
   }, []);
+
+  const handleSearch = () => {
+    if (inputValue === "") setFiltered(false);
+    setFiltered(true);
+  };
 
   return (
     <S.GenreCrudBox>
@@ -19,11 +25,14 @@ const GenreCrudBox = () => {
           <Input
             type="text"
             value={inputValue}
-            onChange={(e) => setInputValue(e.target.value)}
+            onChange={(e) => {
+              setInputValue(e.target.value);
+              setFiltered(false);
+            }}
             placeholder="Search genre"
             inputSize="large"
           />
-          <a title="Search genre">
+          <a title="Search genre" onClick={handleSearch}>
             <S.SearchIcon />
           </a>
         </div>
@@ -34,9 +43,18 @@ const GenreCrudBox = () => {
       </section>
 
       <div id="genreList">
-        {genres.map((genre) => {
-          return <GenreCrudCard genre={genre} key={genre.id} />;
-        })}
+        {filtered
+          ? genres
+              .filter((genre) => {
+                return genre.genre_title
+                  .toLowerCase()
+                  .includes(inputValue.toLowerCase());
+              })
+              .sort((a, b) => a.genre_title.localeCompare(b.genre_title))
+              .map((genre) => <GenreCrudCard genre={genre} key={genre.id} />)
+          : genres.map((genre) => {
+              return <GenreCrudCard genre={genre} key={genre.id} />;
+            })}
       </div>
     </S.GenreCrudBox>
   );
