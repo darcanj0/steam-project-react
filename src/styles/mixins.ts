@@ -43,6 +43,20 @@ const overlay = () => css`
   align-items: center;
 `;
 
+const overlayCrudBox = () => css`
+  background: rgba(0, 0, 0, 0.3);
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  z-index: 9999;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: ${constants.defaultBorderRadius};
+`;
+
 const secondaryBackgroundBox = (light = false) => css`
   min-height: 100vh;
   width: 100%;
@@ -100,6 +114,7 @@ export const mixins = {
   headingStyle,
   footerStyle,
   overlay,
+  overlayCrudBox,
   secondaryBackgroundBox,
   defaultGlass,
   titleStyle,

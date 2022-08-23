@@ -8,7 +8,7 @@ import ToastStyle from "../../types/toastStyle";
 import User from "../../types/user";
 import Button from "../Button";
 import { Input } from "../Input/styles";
-import ModalOverlay from "../ModalOverlay";
+import { ModalOverlay } from "../ModalOverlay";
 import * as S from "./styles";
 
 interface ModalCreateProfileProps {

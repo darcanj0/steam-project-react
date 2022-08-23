@@ -5,12 +5,18 @@ import Input from "../Input";
 import * as S from "./styles";
 
 const GameCrudBox = () => {
-  const [inputValue, setInputValue] = useState<string>();
+  const [inputValue, setInputValue] = useState<string>("");
   const { games, getAllGames } = useGames();
+  const [filtered, setFiltered] = useState(false);
 
   useEffect(() => {
     getAllGames();
   }, []);
+
+  const handleSearch = () => {
+    if (inputValue === "") setFiltered(false);
+    setFiltered(true);
+  };
 
   return (
     <S.GameCrudBox>
@@ -19,11 +25,14 @@ const GameCrudBox = () => {
           <Input
             type="text"
             value={inputValue}
-            onChange={(e) => setInputValue(e.target.value)}
+            onChange={(e) => {
+              setInputValue(e.target.value);
+              setFiltered(false);
+            }}
             placeholder="Search game"
             inputSize="large"
           />
-          <a title="Search game">
+          <a title="Search game" onClick={handleSearch}>
             <S.SearchIcon />
           </a>
         </div>
@@ -34,11 +43,18 @@ const GameCrudBox = () => {
       </section>
 
       <div id="gameList">
-        {games
-          .sort((a, b) => a.title.localeCompare(b.title))
-          .map((game) => {
-            return <GameCrudCard game={game} key={game.id} />;
-          })}
+        {filtered
+          ? games
+              .filter((game) => {
+                return game.title
+                  .toLowerCase()
+                  .includes(inputValue.toLowerCase());
+              })
+              .sort((a, b) => a.title.localeCompare(b.title))
+              .map((game) => <GameCrudCard game={game} key={game.id} />)
+          : games
+              .sort((a, b) => a.title.localeCompare(b.title))
+              .map((game) => <GameCrudCard game={game} key={game.id} />)}
       </div>
     </S.GameCrudBox>
   );

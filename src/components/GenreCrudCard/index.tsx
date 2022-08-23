@@ -1,4 +1,6 @@
+import { useState } from "react";
 import Genre from "../../types/genres";
+import ModalDeleteGenre from "../ModalDeleteGenre";
 import * as S from "./styles";
 
 interface GenreCrudCardProps {
@@ -6,18 +8,28 @@ interface GenreCrudCardProps {
 }
 
 const GenreCrudCard = ({ genre }: GenreCrudCardProps) => {
+  const [showDeleteModal, setShowDeleteModal] = useState(false);
+
   return (
-    <S.GenreCrudCard>
-      <p>{genre.genre_title}</p>
-      <div>
-        <a title="Edit genre">
-          <S.EditIcon />
-        </a>
-        <a title="Delete genre">
-          <S.DeleteIcon />
-        </a>
-      </div>
-    </S.GenreCrudCard>   
+    <>
+      {showDeleteModal && (
+        <ModalDeleteGenre
+          genre={genre}
+          setShowDeleteModal={setShowDeleteModal}
+        />
+      )}
+      <S.GenreCrudCard>
+        <p>{genre.genre_title}</p>
+        <div>
+          <a title="Edit genre">
+            <S.EditIcon />
+          </a>
+          <a title="Delete genre" onClick={() => setShowDeleteModal(true)}>
+            <S.DeleteIcon />
+          </a>
+        </div>
+      </S.GenreCrudCard>
+    </>
   );
 };
 
