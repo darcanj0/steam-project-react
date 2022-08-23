@@ -89,7 +89,6 @@ const Home = ({ inLightMode }: HomeProps) => {
               waitForTransition: false,
             }}
             navigation
-            grabCursor={true}
             coverflowEffect={{
               rotate: 30,
               stretch: 0,
@@ -103,7 +102,11 @@ const Home = ({ inLightMode }: HomeProps) => {
               .map((game) => {
                 return (
                   <SwiperSlide key={game.id}>
-                    <GameHomeCard game={game} key={game.id} />
+                    <GameHomeCard
+                      game={game}
+                      getProfileFavorites={getProfileFavorites}
+                      key={game.id}
+                    />
                   </SwiperSlide>
                 );
               })}
@@ -128,7 +131,6 @@ const Home = ({ inLightMode }: HomeProps) => {
                   waitForTransition: false,
                 }}
                 navigation
-                grabCursor={true}
                 coverflowEffect={{
                   rotate: 30,
                   stretch: 0,
@@ -137,18 +139,24 @@ const Home = ({ inLightMode }: HomeProps) => {
                   slideShadows: false,
                 }}
               >
-                {favorites.map((favorite) => {
-                  const game: Game | undefined = games.find(
-                    (game) => game.title === favorite.game_title
-                  );
-                  return (
-                    game && (
-                      <SwiperSlide>
-                        <GameHomeCard game={game} />
-                      </SwiperSlide>
-                    )
-                  );
-                })}
+                {favorites
+                  .sort((a, b) => a.game_title.localeCompare(b.game_title))
+                  .map((favorite) => {
+                    const game: Game | undefined = games.find(
+                      (game) => game.title === favorite.game_title
+                    );
+                    return (
+                      game && (
+                        <SwiperSlide>
+                          <GameHomeCard
+                            getProfileFavorites={getProfileFavorites}
+                            game={game}
+                            favorited={favorite.id}
+                          />
+                        </SwiperSlide>
+                      )
+                    );
+                  })}
               </Swiper>
             </SwiperContainer>
           </>
@@ -178,7 +186,6 @@ const Home = ({ inLightMode }: HomeProps) => {
                       waitForTransition: false,
                     }}
                     navigation
-                    grabCursor={true}
                     coverflowEffect={{
                       rotate: 30,
                       stretch: 0,
@@ -197,7 +204,10 @@ const Home = ({ inLightMode }: HomeProps) => {
                       .map((filteredGame) => {
                         return (
                           <SwiperSlide>
-                            <GameHomeCard game={filteredGame} />
+                            <GameHomeCard
+                              getProfileFavorites={getProfileFavorites}
+                              game={filteredGame}
+                            />
                           </SwiperSlide>
                         );
                       })}

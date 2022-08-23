@@ -1,4 +1,5 @@
 import styled, { keyframes } from "styled-components";
+import { MdFavoriteBorder, MdFavorite } from "react-icons/md";
 
 const divOverlayAnimation = keyframes`
   0%{
@@ -19,6 +20,14 @@ export const GameHomeCard = styled.div`
 
   img {
     width: 100%;
+  }
+
+  a {
+    ${({ theme }) => theme.mixins.iconButtonStyle()}
+    position: absolute;
+    bottom: 130px;
+    left: 0px;
+    cursor: pointer;
   }
 
   div {
@@ -59,4 +68,12 @@ export const GameHomeCard = styled.div`
       }
     }
   }
+`;
+
+export const FavoriteIconUnselected = styled(MdFavoriteBorder)`
+  ${({ theme }) => theme.mixins.iconStyle()}
+`;
+
+export const FavoriteIconSelected = styled(MdFavorite)`
+  ${({ theme }) => theme.mixins.iconStyle()}
 `;
