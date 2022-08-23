@@ -5,8 +5,10 @@ interface ModalOverlayProps {
   children: ReactNode;
 }
 
-const ModalOverlay = ({ children }: ModalOverlayProps) => {
+export const ModalOverlay = ({ children }: ModalOverlayProps) => {
   return <S.ModalOverlay>{children}</S.ModalOverlay>;
 };
 
-export default ModalOverlay;
+export const ModalOverlayCrudBox = ({ children }: ModalOverlayProps) => {
+  return <S.ModalOverlayCrudBox>{children}</S.ModalOverlayCrudBox>;
+};
