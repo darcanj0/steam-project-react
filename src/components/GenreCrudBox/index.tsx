@@ -56,9 +56,11 @@ const GenreCrudBox = () => {
                 })
                 .sort((a, b) => a.genre_title.localeCompare(b.genre_title))
                 .map((genre) => <GenreCrudCard genre={genre} key={genre.id} />)
-            : genres.map((genre) => {
-                return <GenreCrudCard genre={genre} key={genre.id} />;
-              })}
+            : genres
+                .sort((a, b) => a.genre_title.localeCompare(b.genre_title))
+                .map((genre) => {
+                  return <GenreCrudCard genre={genre} key={genre.id} />;
+                })}
         </div>
       </S.GenreCrudBox>
     </>
