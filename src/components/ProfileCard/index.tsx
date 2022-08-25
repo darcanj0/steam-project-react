@@ -5,11 +5,12 @@ import * as S from "./styles";
 interface ProfileCardProps extends AnchorHTMLAttributes<HTMLAnchorElement> {
   profile: Profile;
   onClick: () => void;
+  active?: boolean;
 }
 
-const ProfileCard = ({ profile, onClick }: ProfileCardProps) => {
+const ProfileCard = ({ profile, ...props }: ProfileCardProps) => {
   return (
-    <S.ProfileCard onClick={onClick}>
+    <S.ProfileCard {...props}>
       <img src={profile.image_url} alt="" />
       <p>{profile.gamer_tag}</p>
     </S.ProfileCard>

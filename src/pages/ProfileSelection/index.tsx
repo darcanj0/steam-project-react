@@ -27,12 +27,12 @@ const ProfileSelection = ({ inLightMode }: ProfileSelectionProps) => {
       {showModal && <ModalCreateProfile setShowModal={setShowModal} />}
       <S.TitleProfileSelection>Who is Playing?</S.TitleProfileSelection>
       <S.ContainerProfileSelection>
-        <S.SwiperCreateProfileCard onClick={() => setShowModal(true)}>
+        <S.CreateProfileCard onClick={() => setShowModal(true)}>
           <div>
             <span>+</span>
           </div>
           <p>Create new Profile</p>
-        </S.SwiperCreateProfileCard>
+        </S.CreateProfileCard>
 
         {userProfiles.map((profile) => {
           return (

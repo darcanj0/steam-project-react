@@ -4,6 +4,7 @@ export const colors = {
   tertiaryColor: "#5f23a5",
   testColor: "#ad2ad5",
   whiteColor: "#fffcff",
+  deleteColor: "#E5342C",
 
   primaryColorOpacity: "rgba(14, 15, 38, 0.8)",
   secondaryColorOpacity: "rgba(48, 35, 153, 0.5)",

@@ -15,7 +15,7 @@ export const ContainerProfileSelection = styled.div`
   overflow-y: auto;
 `;
 
-export const SwiperCreateProfileCard = styled.a`
+export const CreateProfileCard = styled.a`
   ${({ theme }) => css`
     width: 15.625rem;
     background: transparent;

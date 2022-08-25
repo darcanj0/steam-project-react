@@ -1,7 +1,11 @@
 import styled, { css } from "styled-components";
 
-export const ProfileCard = styled.a`
-  ${({ theme }) => css`
+interface ProfileCardProps {
+  active?: boolean;
+}
+
+export const ProfileCard = styled.a<ProfileCardProps>`
+  ${({ theme, active }) => css`
     width: 15.625rem;
     background: transparent;
     height: 15.625rem;
@@ -14,8 +18,9 @@ export const ProfileCard = styled.a`
       width: 80%;
       height: 12.5rem;
       border-radius: 50%;
-      border: 0.625rem solid transparent;
-      transition: all .3s ease;
+      border: 0.625rem solid
+        ${active ? theme.colors.tertiaryColorOpacity : "transparent"};
+      transition: all 0.3s ease;
     }
 
     p {

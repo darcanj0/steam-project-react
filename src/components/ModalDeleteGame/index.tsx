@@ -54,7 +54,9 @@ const ModalDeleteGame = ({
         </div>
         <div>
           <Button onClick={() => setShowDeleteModal(false)}>No</Button>
-          <Button onClick={handleGameDeletion}>Yes</Button>
+          <Button onClick={handleGameDeletion} specialColor="delete">
+            Yes
+          </Button>
         </div>
       </S.ModalDeleteGame>
     </ModalOverlayCrudBox>

@@ -28,6 +28,7 @@ export const GameHomeCard = styled.div`
     bottom: 130px;
     left: 0px;
     cursor: pointer;
+    z-index: 9999;
   }
 
   div {

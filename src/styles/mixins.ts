@@ -1,4 +1,5 @@
 import { css } from "styled-components";
+import { boolean } from "yup";
 import { colors } from "./colors";
 import { constants } from "./constants";
 
@@ -73,12 +74,17 @@ const defaultGlass = () => css`
   backdrop-filter: blur(${constants.glassBlur});
 `;
 
-const defaultButton = (btnSize = "small") => css`
+const defaultButton = (specialColor: "delete" | "purple" | undefined) => css`
   height: 45px;
   width: 300px;
   background-color: transparent;
-  border: 3px solid ${colors.primaryColorOpacity};
+  border: 3px solid;
   border-radius: ${constants.defaultBorderRadius};
+  border-color: ${specialColor === "delete"
+    ? colors.deleteColor
+    : specialColor === "purple"
+    ? colors.tertiaryColor
+    : colors.primaryColor};
   cursor: pointer;
   transition: all 0.3s ease;
   color: ${colors.whiteTextColor};
@@ -87,7 +93,11 @@ const defaultButton = (btnSize = "small") => css`
   font-weight: 400;
 
   :hover {
-    background-color: ${colors.primaryColor};
+    background-color: ${specialColor === "delete"
+      ? colors.deleteColor
+      : specialColor === "purple"
+      ? colors.tertiaryColor
+      : colors.primaryColor};
   }
 `;
 

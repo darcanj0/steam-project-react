@@ -54,7 +54,9 @@ const ModalDeleteGenre = ({
         </div>
         <div>
           <Button onClick={() => setShowDeleteModal(false)}>No</Button>
-          <Button onClick={handleGenreDeletion}>Yes</Button>
+          <Button onClick={handleGenreDeletion} specialColor="delete">
+            Yes
+          </Button>
         </div>
       </S.ModalDeleteGenre>
     </ModalOverlayCrudBox>

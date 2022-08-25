@@ -1,7 +1,11 @@
 import styled, { css } from "styled-components";
 
-export const DefaultButton = styled.button`
-  ${({ theme }) => css`
-    ${theme.mixins.defaultButton("small")}
+interface ButtonProps {
+  specialColor?: "delete" | "purple";
+}
+
+export const DefaultButton = styled.button<ButtonProps>`
+  ${({ theme, specialColor }) => css`
+    ${theme.mixins.defaultButton(specialColor)}
   `}
 `;

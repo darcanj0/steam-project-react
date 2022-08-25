@@ -1,8 +1,9 @@
-import { ButtonHTMLAttributes } from "react";
+import { ButtonHTMLAttributes, ReactNode } from "react";
 import * as S from "./styles";
 
 interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
-  children: any;
+  children: ReactNode;
+  specialColor?: "delete" | "purple";
 }
 
 const Button = ({ children, ...props }: ButtonProps) => {
