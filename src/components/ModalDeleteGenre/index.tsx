@@ -6,6 +6,7 @@ import api from "../../api";
 import toast from "react-hot-toast";
 import ToastStyle from "../../types/toastStyle";
 import Button from "../Button";
+import headers from "../../api/header";
 
 interface ModalDeleteGenreProps {
   setShowDeleteModal: React.Dispatch<React.SetStateAction<boolean>>;
@@ -19,11 +20,6 @@ const ModalDeleteGenre = ({
   const { getAllGenres } = useGenres();
 
   const handleGenreDeletion = () => {
-    const headers = {
-      headers: {
-        Authorization: `Bearer ${localStorage.getItem("steamProjectToken")}`,
-      },
-    };
     api
       .delete(`/genre/${genre.id}`, headers)
       .then((res) => {

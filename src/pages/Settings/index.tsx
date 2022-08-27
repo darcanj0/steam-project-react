@@ -1,10 +1,9 @@
-import { AxiosError } from "axios";
-import jwt_decode from "jwt-decode";
 import { useState } from "react";
 import toast from "react-hot-toast";
 import { FiAlertTriangle } from "react-icons/fi";
 import { useNavigate } from "react-router-dom";
 import api from "../../api";
+import headers from "../../api/header";
 import ConfigContentBox from "../../components/ConfigContentBox";
 import ContentBox from "../../components/ContentBox";
 import Footer from "../../components/Footer";
@@ -14,7 +13,6 @@ import NavBar from "../../components/NavBar";
 import OptionsList from "../../components/OptionsList";
 import SecondaryContainer from "../../components/SecondaryContainer";
 import { useAuth } from "../../contexts/auth";
-import { RoutePath } from "../../types/routes";
 import ToastStyle from "../../types/toastStyle";
 import User from "../../types/user";
 import * as S from "./styles";
@@ -49,12 +47,6 @@ const Settings = (props: any) => {
     cpf: user.cpf,
     adm_password: "",
   });
-
-  const headers = {
-    headers: {
-      Authorization: `Bearer ${localStorage.getItem("steamProjectToken")}`,
-    },
-  };
 
   const handleEmailEdit = () => {
     if (user.email === inputsValues.email) return;
@@ -186,7 +178,7 @@ const Settings = (props: any) => {
           profiles: false,
           settings: true,
         }}
-      ></NavBar>
+      />
 
       <ContentBox>
         <HomeHeading>User Settings</HomeHeading>
