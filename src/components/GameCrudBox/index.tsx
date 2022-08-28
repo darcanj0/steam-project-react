@@ -2,12 +2,14 @@ import { useEffect, useState } from "react";
 import { useGames } from "../../contexts/games";
 import GameCrudCard from "../GameCrudCard";
 import Input from "../Input";
+import ModalCreateGame from "../ModalCreateGame";
 import * as S from "./styles";
 
 const GameCrudBox = () => {
   const [inputValue, setInputValue] = useState<string>("");
   const { games, getAllGames } = useGames();
   const [filtered, setFiltered] = useState(false);
+  const [showCreationModal, setShowCreationModal] = useState(false);
 
   useEffect(() => {
     getAllGames();
@@ -20,6 +22,9 @@ const GameCrudBox = () => {
 
   return (
     <S.GameCrudBox>
+      {showCreationModal && (
+        <ModalCreateGame setShowCreationModal={setShowCreationModal} />
+      )}
       <section>
         <div>
           <Input
@@ -37,7 +42,7 @@ const GameCrudBox = () => {
           </a>
         </div>
 
-        <a title="Add new game">
+        <a title="Add new game" onClick={() => setShowCreationModal(true)}>
           <S.AddIcon />
         </a>
       </section>
