@@ -1,6 +1,7 @@
 import { useState } from "react";
 import Game from "../../types/game";
 import ModalDeleteGame from "../ModalDeleteGame";
+import ModalEditGame from "../ModalEditGame";
 import * as S from "./styles";
 
 interface GameCrudCardProps {
@@ -9,11 +10,15 @@ interface GameCrudCardProps {
 
 const GameCrudCard = ({ game }: GameCrudCardProps) => {
   const [showDeleteModal, setShowDeleteModal] = useState(false);
+  const [showEditModal, setShowEditModal] = useState(false);
 
   return (
     <>
       {showDeleteModal && (
         <ModalDeleteGame setShowDeleteModal={setShowDeleteModal} game={game} />
+      )}
+      {showEditModal && (
+        <ModalEditGame game={game} setShowEditModal={setShowEditModal} />
       )}
       <S.GameCrudCard>
         <img src={game.cover_image_url} alt={game.title} />
@@ -25,7 +30,7 @@ const GameCrudCard = ({ game }: GameCrudCardProps) => {
           </div>
 
           <div id="cardBtns">
-            <a title="Edit game">
+            <a title="Edit game" onClick={() => setShowEditModal(true)}>
               <S.EditIcon />
             </a>
             <a

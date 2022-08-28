@@ -4,7 +4,7 @@ interface Game {
   year: number;
   title: string;
   trailer_url: string;
-  gameplay_utl: string;
+  gameplay_url: string;
   cover_image_url: string;
   description: string;
   genres: { genre_title: string }[];

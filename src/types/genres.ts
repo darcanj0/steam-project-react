@@ -1,5 +1,5 @@
 interface Genre {
-  id: string;
+  id: number;
   genre_title: string;
 
   created_at?: Date;
