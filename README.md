@@ -8,6 +8,8 @@ This Project was developed in the 5th module of my Web Development course as Blu
 
 - Se presenciar problemas com requisições, utilize a API e o front end localmente. Você achará instruções nos respectivos repositórios para isso.
 
+- Para testar o CRUD, você precisará se cadastrar como admin. A senha provisória para isso é a seguinte: secretPassForAdmin
+
 ## Cloning and running
 
 Clone this rep
